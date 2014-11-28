@@ -145,6 +145,7 @@ public class Fenetre extends JFrame{
         confirmerJoueurs.addActionListener(controlButton);
 
         pan.add(confirmerJoueurs);
+
         initialisation.setContentPane(pan);
     }
 
