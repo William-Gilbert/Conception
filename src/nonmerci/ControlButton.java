@@ -64,6 +64,29 @@ public class ControlButton implements ActionListener {
         //Création de la manche
             fen.nouvelleManche();
         }
+
+        if(e.getSource()==fen.confirmerJoueurs){
+            int nbJoueurs=0;
+            String nom,jetonsInit;
+
+            Joueur j;
+            for(JTextField champs:fen.champsJoueurs){
+                nbJoueurs+=1;
+                nom = champs.getText();
+                jetonsInit = fen.nbjet.getText();
+                if(nom==null || jetonsInit==null){
+                    //Joueur non null pour Thomas
+                }
+                else {
+                    j = new Joueur(champs.getText(), Integer.parseInt(jetonsInit));
+                    partie.addJoueur(j);
+                    partie.setNbJoueurs(nbJoueurs);
+                    fen.initialisation.dispose();
+                    fen.nouvelleManche();
+                }
+            }
+
+        }
     }
 
 

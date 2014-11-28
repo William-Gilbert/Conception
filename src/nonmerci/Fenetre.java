@@ -24,8 +24,8 @@ public class Fenetre extends JFrame{
     private fondPanel imgManche;
 
     public ArrayList<String> nomsInit;
-    public int nbJetonsInit;
-    private JTextField nbjet;
+    public JTextField nbjet;
+    public JFrame initialisation;
 
 
     public Fenetre(){
@@ -115,10 +115,9 @@ public class Fenetre extends JFrame{
     public void widgetCreationJoueur() {
         JLabel jeton;
         JPanel pan = new JPanel();
-        nbjet = new JTextField();
         champsJoueurs = new ArrayList<JTextField>();
         nbjet = new JTextField();
-        JFrame initialisation = new JFrame();
+        initialisation = new JFrame();
 
         initialisation.setTitle("Initialisation");
         initialisation.setVisible(true);

@@ -43,9 +43,8 @@ public class ControlMenu implements ActionListener {
 
             fen.widgetCreationJoueur();
         }
-        if(e.getSource()==fen.confirmerJoueurs){
-            System.out.println("lkjlkj");
-        }
+
+
 
     }
 }
