@@ -23,20 +23,23 @@ public class ControlButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==fen.boutonLancer) {
-            Integer[] nbJoueursPossible = {3, 4, 5};
-            int nbJoueurs;
+            String[] nbJoueursPossible = {"3", "4", "5"};
+            String nbJoueurs=null;
 
             //Nombre de joueurs
-            nbJoueurs = (Integer) JOptionPane.showInputDialog(
-                    null,
-                    "Choisissez le nombre de joueurs",
-                    "Nouvelle partie",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    nbJoueursPossible,
-                    nbJoueursPossible[0]);
-            partie.setNbJoueurs(nbJoueurs);
 
+            while(nbJoueurs==null){
+                nbJoueurs = (String) JOptionPane.showInputDialog(
+                        null,
+                        "Choisissez le nombre de joueurs",
+                        "Nouvelle partie",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        nbJoueursPossible,
+                        nbJoueursPossible[0]);
+
+            }
+            partie.setNbJoueurs(Integer.parseInt(nbJoueurs));
             fen.widgetCreationJoueur();
         }
 

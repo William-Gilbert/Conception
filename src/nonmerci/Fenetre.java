@@ -99,13 +99,13 @@ public class Fenetre extends JFrame{
 
     public void nouvelleManche() {
         //Creer un panel avec une image de fond avec une table
-        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
+        imgManche=new fondPanel(new ImageIcon("table.png").getImage());
         init();
         creerMenu();
         creerWidget(imgManche);
 
         setTitle("Non Merci!");
-        setSize(400,400);
+        setSize(1280,720);
         setResizable(false);
 
         setVisible(true);
