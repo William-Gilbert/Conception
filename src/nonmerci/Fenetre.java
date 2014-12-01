@@ -78,6 +78,20 @@ public class Fenetre extends JFrame{
 
     }
 
+    public void recommencer(){
+        //Fonction identique au constructeurs permettant de recharger la fenêtre s'il
+        //y a problème pendant l'initialisation
+        init();
+        creerMenu();
+        imgPan=new fondPanel(new ImageIcon("fond.jpg").getImage());
+        creerWidget(imgPan);
+        setTitle("Non Merci!");
+        setSize(400,400);
+        setResizable(false);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
     public void creerMenu(){
 
 
@@ -115,20 +129,24 @@ public class Fenetre extends JFrame{
     public void widgetCreationJoueur() {
         JLabel jeton;
         JPanel pan = new JPanel();
+        //list des textfields
         champsJoueurs = new ArrayList<JTextField>();
         nbjet = new JTextField();
-        initialisation = new JFrame();
 
+
+        initialisation = new JFrame();
         initialisation.setTitle("Initialisation");
         initialisation.setVisible(true);
         initialisation.setSize(200, 300);
         initialisation.setLocationRelativeTo(null);
 
+        //Création des champs par rapports au nombre de joueurs
         for(int i = 1; i<partie.getNbJoueurs()+1; i++) {
             champsJoueurs.add(new JTextField());
         }
         System.out.println(champsJoueurs.size());
 
+        //placement des widgets de la fenêtre
         for(int i = 0 ; i<champsJoueurs.size() ; i++){
             JLabel labelJoueur = new JLabel("Joueur"+(i+1));
             champsJoueurs.get(i).setColumns(15);

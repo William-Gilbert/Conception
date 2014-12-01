@@ -15,8 +15,6 @@ public class ControlButton implements ActionListener {
     public ControlButton(Fenetre f, Partie p) {
         fen=f;
         partie=p;
-
-
     }
 
 
@@ -24,26 +22,25 @@ public class ControlButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==fen.boutonLancer) {
             String[] nbJoueursPossible = {"3", "4", "5"};
-            String nbJoueurs=null;
+            String nbJoueurs;
 
-            //Nombre de joueurs
+            //Panel pour choisir le nombre de joueurs
+            nbJoueurs = (String) JOptionPane.showInputDialog(
+                null,"Choisissez le nombre de joueurs","Nouvelle partie",JOptionPane.QUESTION_MESSAGE,null,
+                nbJoueursPossible,
+                nbJoueursPossible[0]);
 
-            while(nbJoueurs==null){
-                nbJoueurs = (String) JOptionPane.showInputDialog(
-                        null,
-                        "Choisissez le nombre de joueurs",
-                        "Nouvelle partie",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        nbJoueursPossible,
-                        nbJoueursPossible[0]);
-
+            //Cas ou on appuie sur "annuler" ou sur la croix pour fermer la fenêtre
+            if(nbJoueurs==null){
+                fen.recommencer();
+            }else {
+                partie.setNbJoueurs(Integer.parseInt(nbJoueurs));
+                fen.widgetCreationJoueur();
             }
-            partie.setNbJoueurs(Integer.parseInt(nbJoueurs));
-            fen.widgetCreationJoueur();
         }
 
         if(e.getSource()==fen.confirmerJoueurs){
+            //Instancation des joueurs créer dans la JFrame
             int nbJoueurs=0;
             String nom,jetonsInit;
 
