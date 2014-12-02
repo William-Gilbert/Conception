@@ -1,72 +1,83 @@
 package nonmerci;
 
 import javax.swing.*; //Pour les composants graphiques
+import javax.swing.border.Border;
 import java.awt.*; //Pour la Jframe
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame{
-    public JMenuBar barMenu;
-    public JMenu jeuMenu;
-    public  JMenuItem nouveauItem;
+    //Attributs du menu
+    public JMenuItem nouveauItem;
+    public JMenuItem quitterItem;
+    public JMenuItem apropos;
+    //Controlleurs
     public ControlMenu controlMenu;
     public ControlButton controlButton;
-
+    //Boutons
     public JButton confirmerJoueurs;
-    public Partie partie;
-    public JPanel global;
     public JButton boutonLancer;
-    private JPanel lancementPanel;
-    private fondPanel imgPan;
-
+    public JButton boutonQuitter;
+    //Données
+    public Partie partie;
     public ArrayList<JTextField> champsJoueurs;
     public ArrayList<JLabel> labelJoueurs;
-
-
-    private fondPanel imgManche;
-
     public ArrayList<String> nomsInit;
     public JTextField nbjet;
+    //Panels et JFrame
+    public fondPanel imgManche;
+    public JPanel global;
     public JFrame initialisation;
 
 
     public Fenetre(){
-
         init();
         creerMenu();
         creerMenuPrincipal();
+
         setTitle("Non Merci!");
-        setSize(400,400);
+        setSize(212,300);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void creerMenuPrincipal() {
-        imgPan=new fondPanel(new ImageIcon("fond.jpg").getImage());
-        global.setLayout(new BorderLayout());
-        imgPan.add(boutonLancer, BorderLayout.CENTER);
-        global.add(imgPan);
+        fondPanel fondMenuPrincipal= new fondPanel(new ImageIcon("fond.jpg").getImage());
+        global.setLayout(new BorderLayout());   //Efface le Layout
+
+        fondMenuPrincipal.setLayout(new BoxLayout(fondMenuPrincipal, BoxLayout.Y_AXIS));//aligner verticalement
+        boutonLancer.setAlignmentX(CENTER_ALIGNMENT);//centrer les boutons
+        boutonQuitter.setAlignmentX(CENTER_ALIGNMENT);
+        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,20)));//ajouter de l'espace entre les boutons
+        fondMenuPrincipal.add(boutonLancer);
+        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,5)));
+        fondMenuPrincipal.add(boutonQuitter);
+
+        global.add(fondMenuPrincipal);
         setContentPane(global);
         pack();
     }
 
     public void init() {
-        partie = new Partie();
-        lancementPanel = new JPanel();
         global = new JPanel();
-        barMenu = new JMenuBar();
-        jeuMenu = new JMenu("Partie");
+        partie = new Partie();
+        nomsInit = new ArrayList<String>();
+
         controlMenu = new ControlMenu(this, partie);
         controlButton = new ControlButton(this,partie);
-        nomsInit = new ArrayList<String>();
 
         confirmerJoueurs = new JButton("Confirmer");
         boutonLancer = new JButton("Démarrer le jeu");
+        boutonQuitter = new JButton("Quitter");
         boutonLancer.addActionListener(controlButton);
+        boutonQuitter.addActionListener(controlButton);
 
-        //Listener & menu
+        quitterItem = new JMenuItem("Quitter");
+        apropos = new JMenuItem("À propos");
         nouveauItem = new JMenuItem("Nouvelle partie");
         nouveauItem.addActionListener(controlMenu);
+        apropos.addActionListener(controlMenu);
+        quitterItem.addActionListener(controlMenu);
 
 
 
@@ -80,15 +91,26 @@ public class Fenetre extends JFrame{
         creerMenu();
         creerMenuPrincipal();
         setTitle("Non Merci!");
-        setSize(400,400);
+        setSize(212,300);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void creerMenu(){
+        JMenuBar barMenu;
+        JMenu jeuMenu;
+        JMenu plusMenu;
+        barMenu = new JMenuBar();
+        jeuMenu = new JMenu("Partie");
+        plusMenu = new JMenu("?");
+
         jeuMenu.add(nouveauItem);
+        jeuMenu.add(quitterItem);
+        plusMenu.add(apropos);
+
         barMenu.add(jeuMenu);
+        barMenu.add(plusMenu);
         setJMenuBar(barMenu);
     }
 
@@ -100,7 +122,6 @@ public class Fenetre extends JFrame{
 
         init();
         creerMenu();
-
         global.setLayout(new BorderLayout()); //Efface le pane actuel
 
         afficherImageTest();

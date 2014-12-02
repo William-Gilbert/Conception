@@ -20,6 +20,9 @@ public class ControlButton implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==fen.boutonQuitter){
+            System.exit(0);
+        }
         if(e.getSource()==fen.boutonLancer) {
             String[] nbJoueursPossible = {"3", "4", "5"};
             String nbJoueurs;

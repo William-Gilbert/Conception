@@ -46,6 +46,24 @@ public class ControlMenu implements ActionListener {
             }
         }
 
+        if(e.getSource()==fen.quitterItem){
+            System.exit(0);
+        }
+
+        if(e.getSource()==fen.apropos) {
+            JFrame apropos = new JFrame();
+            JPanel panContenu = new JPanel();
+            JLabel contenu = new JLabel("<html>Jeu de Carte non Merci<br><br> " +
+                    "Proposé par :<br>El Houssine Jawad<br>Gilbert William<br>Guyon Loan<br>" +
+                    "Morel Sylvain<br>Sauner Alexandre<br>Valet Thomas<br>Viennent William</html>");
+
+            apropos.setTitle("A propos");
+            apropos.setVisible(true);
+            apropos.setSize(200, 300);
+            apropos.setLocationRelativeTo(null);
+            panContenu.add(contenu);
+            apropos.setContentPane(panContenu);
+        }
 
 
     }
