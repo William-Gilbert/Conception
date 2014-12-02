@@ -19,6 +19,7 @@ public class Fenetre extends JFrame{
     private fondPanel imgPan;
 
     public ArrayList<JTextField> champsJoueurs;
+    public ArrayList<JLabel> labelJoueurs;
 
 
     private fondPanel imgManche;
@@ -131,6 +132,7 @@ public class Fenetre extends JFrame{
         JPanel pan = new JPanel();
         //list des textfields
         champsJoueurs = new ArrayList<JTextField>();
+        labelJoueurs = new ArrayList<JLabel>();
         nbjet = new JTextField();
 
 
@@ -143,14 +145,15 @@ public class Fenetre extends JFrame{
         //Création des champs par rapports au nombre de joueurs
         for(int i = 1; i<partie.getNbJoueurs()+1; i++) {
             champsJoueurs.add(new JTextField());
+            labelJoueurs.add(new JLabel());
         }
         System.out.println(champsJoueurs.size());
 
         //placement des widgets de la fenêtre
         for(int i = 0 ; i<champsJoueurs.size() ; i++){
-            JLabel labelJoueur = new JLabel("Joueur"+(i+1));
+            labelJoueurs.get(i).setText("Joueur"+(i+1));
             champsJoueurs.get(i).setColumns(15);
-            pan.add(labelJoueur);
+            pan.add(labelJoueurs.get(i));
             pan.add(champsJoueurs.get(i));
         }
 

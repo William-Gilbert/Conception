@@ -40,19 +40,33 @@ public class ControlButton implements ActionListener {
         }
 
         if(e.getSource()==fen.confirmerJoueurs){
-            //Instancation des joueurs créer dans la JFrame
             int nbJoueurs=0;
             String nom,jetonsInit;
-
+            boolean passeralasuite = true;//faux si un label est vide
             Joueur j;
-            for(JTextField champs:fen.champsJoueurs){
+
+            for(int i=0 ; i< fen.champsJoueurs.size(); i++){
                 nbJoueurs+=1;
-                nom = champs.getText();
-                jetonsInit = fen.nbjet.getText();
-                if(nom==null || jetonsInit==null){
+                nom = fen.champsJoueurs.get(i).getText();
+
+                if(nom.equals("")){
+                    passeralasuite=false;
                     //Joueur non null pour Thomas
+                    // remplace le texte pour avertir qu'il ne doit pas être vide
+                    fen.labelJoueurs.get(i).setText("Joueurs "+(i+1)+"(champ vide)");
+                    fen.champsJoueurs.get(i).repaint();
                 }
-                else {
+            }
+
+            jetonsInit = fen.nbjet.getText();
+            if(jetonsInit.equals("")){
+                passeralasuite=false;
+                fen.nbjet.setText("11");
+                fen.nbjet.repaint();
+            }
+
+            if(passeralasuite) {
+                for(JTextField champs:fen.champsJoueurs){
                     j = new Joueur(champs.getText(), Integer.parseInt(jetonsInit));
                     partie.addJoueur(j);
                     partie.setNbJoueurs(nbJoueurs);
@@ -60,7 +74,6 @@ public class ControlButton implements ActionListener {
                     fen.nouvelleManche();
                 }
             }
-
         }
     }
 
