@@ -33,24 +33,24 @@ public class Fenetre extends JFrame{
 
         init();
         creerMenu();
-        imgPan=new fondPanel(new ImageIcon("fond.jpg").getImage());
-        creerWidget(imgPan);
-
+        creerMenuPrincipal();
         setTitle("Non Merci!");
         setSize(400,400);
         setResizable(false);
-
-
-
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    private void creerMenuPrincipal() {
+        imgPan=new fondPanel(new ImageIcon("fond.jpg").getImage());
+        global.setLayout(new BorderLayout());
+        imgPan.add(boutonLancer, BorderLayout.CENTER);
+        global.add(imgPan);
+        setContentPane(global);
+        pack();
+    }
+
     public void init() {
-
-
-
-
         partie = new Partie();
         lancementPanel = new JPanel();
         global = new JPanel();
@@ -58,18 +58,12 @@ public class Fenetre extends JFrame{
         jeuMenu = new JMenu("Partie");
         controlMenu = new ControlMenu(this, partie);
         controlButton = new ControlButton(this,partie);
-
         nomsInit = new ArrayList<String>();
 
-
-//--------------------------- NE FONCTIONNE PAS AVEC UN FOND
-        //listener & boutons NE FONCTIONNE PAS AVEC UN FOND
         confirmerJoueurs = new JButton("Confirmer");
-        //L'action listener de ce bouton ce trouve dans controlMenu
-
         boutonLancer = new JButton("Démarrer le jeu");
         boutonLancer.addActionListener(controlButton);
-//--------------------------------------------------------------
+
         //Listener & menu
         nouveauItem = new JMenuItem("Nouvelle partie");
         nouveauItem.addActionListener(controlMenu);
@@ -84,8 +78,7 @@ public class Fenetre extends JFrame{
         //y a problème pendant l'initialisation
         init();
         creerMenu();
-        imgPan=new fondPanel(new ImageIcon("fond.jpg").getImage());
-        creerWidget(imgPan);
+        creerMenuPrincipal();
         setTitle("Non Merci!");
         setSize(400,400);
         setResizable(false);
@@ -94,38 +87,41 @@ public class Fenetre extends JFrame{
     }
 
     public void creerMenu(){
-
-
         jeuMenu.add(nouveauItem);
         barMenu.add(jeuMenu);
         setJMenuBar(barMenu);
     }
 
-    public void creerWidget(fondPanel imgfond){
-
-
-        global.setLayout(new BorderLayout());
-        imgPan.add(boutonLancer, BorderLayout.CENTER);
-        global.add(imgfond);
-        setContentPane(global);
-        pack();
-    }
 
 
     public void nouvelleManche() {
         //Creer un panel avec une image de fond avec une table
         imgManche=new fondPanel(new ImageIcon("table.png").getImage());
+
         init();
         creerMenu();
-        creerWidget(imgManche);
+
+        global.setLayout(new BorderLayout()); //Efface le pane actuel
+
+        afficherImageTest();
+
+        global.add(imgManche);
+        setContentPane(global);
 
         setTitle("Non Merci!");
         setSize(1280,720);
         setResizable(false);
-
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
+
+    public void afficherImageTest(){
+        //Fonction test pour afficher une manche
+        JLabel carte1 = new JLabel(new ImageIcon("3.png"));
+        imgManche.add(carte1);
+    }
+
 
     public void widgetCreationJoueur() {
         JLabel jeton;
