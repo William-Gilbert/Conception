@@ -6,9 +6,6 @@ import java.awt.*; //Pour la Jframe
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame{
-    //COUCOUSYLVAIN TEST COMMENTAIRE
-    //COUCOUSYLVAIN TEST COMMENTAIRE
-    //COUCOUSYLVAIN TEST COMMENTAIRE
     //Attributs du menu
     public JMenuItem nouveauItem;
     public JMenuItem quitterItem;
@@ -30,6 +27,8 @@ public class Fenetre extends JFrame{
     public fondPanel imgManche;
     public JPanel global;
     public JFrame initialisation;
+    //Timer
+    JLabel labelTime;
 
 
     public Fenetre(){
@@ -74,6 +73,8 @@ public class Fenetre extends JFrame{
         boutonQuitter = new JButton("Quitter");
         boutonLancer.addActionListener(controlButton);
         boutonQuitter.addActionListener(controlButton);
+
+
 
         quitterItem = new JMenuItem("Quitter");
         apropos = new JMenuItem("À propos");
@@ -120,19 +121,42 @@ public class Fenetre extends JFrame{
 
 
     public void nouvelleManche() {
-        //Creer un panel avec une image de fond avec une table
+        GridBagConstraints c;
         imgManche=new fondPanel(new ImageIcon("table.png").getImage());
-
-        init();
-        creerMenu();
+        Manche m = new Manche();
+        JLabel piocheLabel = new JLabel(new ImageIcon("pioche.png"));
+        global = new JPanel();
         global.setLayout(new BorderLayout()); //Efface le pane actuel
 
-        afficherImageTest();
+        //Squelette de placement pour le jeu selon le nombre de joueurs
+        switch(partie.getNbJoueurs()){
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+
+                imgManche.setLayout(new GridBagLayout());
+                //Pioche
+                c = new GridBagConstraints();
+                c.gridx=2;
+                c.gridy=2;
+                imgManche.add(piocheLabel, c);
+                //une Carte
+                JLabel carte1 = new JLabel(new ImageIcon("3.png"));
+                c.gridx=3;
+                c.gridy=3;
+                imgManche.add(carte1);
+
+
+                break;
+        }
+
+
 
         global.add(imgManche);
         setContentPane(global);
 
-        setTitle("Non Merci!");
         setSize(1280,720);
         setResizable(false);
         setVisible(true);

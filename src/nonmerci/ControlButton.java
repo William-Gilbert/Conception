@@ -8,13 +8,14 @@ import java.awt.event.ActionListener;
  * Created by William on 20/11/2014.
  */
 public class ControlButton implements ActionListener {
-   private Fenetre fen;
+    private Fenetre fen;
     private Partie partie;
 
 
     public ControlButton(Fenetre f, Partie p) {
         fen=f;
         partie=p;
+
     }
 
 
@@ -74,10 +75,15 @@ public class ControlButton implements ActionListener {
                 for(JTextField champs:fen.champsJoueurs){
                     j = new Joueur(champs.getText(), Integer.parseInt(jetonsInit));
                     partie.addJoueur(j);
-                    partie.setNbJoueurs(nbJoueurs);
-                    fen.initialisation.dispose();
-                    fen.nouvelleManche();
+
                 }
+                partie.setNbJoueurs(nbJoueurs);
+                fen.initialisation.dispose();
+
+
+                fen.nouvelleManche();
+
+
             }
         }
     }

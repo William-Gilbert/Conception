@@ -10,6 +10,7 @@ public class Partie {
     private ArrayList<Joueur> joueurs;
     private int nbJoueurs;
 
+
     public Partie(){
         //Une partie est pour l'instant composé d'une liste de joueurs
         joueurs = new ArrayList<Joueur>();

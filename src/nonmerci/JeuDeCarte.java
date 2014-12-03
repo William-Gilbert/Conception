@@ -3,15 +3,19 @@ package nonmerci;
 import java.util.*;
 
 public class JeuDeCarte {
-    private List<Carte> jeu;
+    public List<Carte> jeu;
 
 
     public JeuDeCarte(int taille) {
         jeu = new ArrayList<Carte>();
         Carte c;
-        for(int i=3 ; i<taille+3 ; i++){
+        for(int i=3 ; i<taille ; i++){
             c = new Carte(i);
             jeu.add(c);
+        }
+        Random loto = new Random();
+        while(jeu.size()!=24){
+            jeu.remove(loto.nextInt(jeu.size()-1));//choisi 24 cartes parmis les 35, de façon aléatoire
         }
     }
 
