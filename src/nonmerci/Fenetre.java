@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Fenetre extends JFrame{
     //COUCOUSYLVAIN TEST COMMENTAIRE
+    //COUCOUSYLVAIN TEST COMMENTAIRE
+    //COUCOUSYLVAIN TEST COMMENTAIRE
     //Attributs du menu
     public JMenuItem nouveauItem;
     public JMenuItem quitterItem;
