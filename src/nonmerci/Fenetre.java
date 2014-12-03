@@ -6,6 +6,7 @@ import java.awt.*; //Pour la Jframe
 import java.util.ArrayList;
 
 public class Fenetre extends JFrame{
+    //COUCOUSYLVAIN TEST COMMENTAIRE
     //Attributs du menu
     public JMenuItem nouveauItem;
     public JMenuItem quitterItem;
