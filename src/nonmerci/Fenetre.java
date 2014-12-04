@@ -122,7 +122,7 @@ public class Fenetre extends JFrame{
 
     public void nouvelleManche() {
         GridBagConstraints c;
-        imgManche=new fondPanel(new ImageIcon("table.png").getImage());
+        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
         Manche m = new Manche();
         JLabel piocheLabel = new JLabel(new ImageIcon("pioche.png"));
         global = new JPanel();
