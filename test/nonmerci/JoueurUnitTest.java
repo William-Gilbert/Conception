@@ -41,13 +41,7 @@ public class JoueurUnitTest {
         Assert.assertEquals(j1.nbCartes(), nombreCartesJ+1);//nombre de cartes de joueur augmente de1
     }
 
-    @Test
-    public void resetTest() {
-        Joueur j = new Joueur("totto", 11);
-        Assert.assertEquals(11, j.nbPoints());
-        j.reset();
-        Assert.assertEquals(0, j.nbPoints());
-    }
+
 
 
 

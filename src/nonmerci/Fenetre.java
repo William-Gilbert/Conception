@@ -157,7 +157,7 @@ public class Fenetre extends JFrame{
         global.add(imgManche);
         setContentPane(global);
 
-        setSize(1280,720);
+        setSize(1280,770);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
