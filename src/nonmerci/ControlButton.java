@@ -65,7 +65,7 @@ public class ControlButton implements ActionListener {
             }
 
             jetonsInit = fen.nbjet.getText();
-            if(jetonsInit.equals("")){
+            if(jetonsInit.equals("") || Integer.parseInt(jetonsInit)>11){
                 passeralasuite=false;
                 fen.nbjet.setText("11");
                 fen.nbjet.repaint();

@@ -118,251 +118,85 @@ public class Fenetre extends JFrame{
         setJMenuBar(barMenu);
     }
 
-
-
-    public void nouvelleManche() {
-        GridBagConstraints c;
-        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
-        Manche m = new Manche();
+    public void affichageDebutManche(){
+        //Label de placement
         JLabel piocheLabel = new JLabel(new ImageIcon("pioche.jpg"));
-
-        JLabel carte1 = new JLabel(new ImageIcon("3.png"));//Carte courante
-
+        JLabel carteCourante = new JLabel(new ImageIcon("3.jpg"));//Carte courante
         global = new JPanel();
-        global.setLayout(new BorderLayout()); //Efface le pane actuel
+        global.setLayout(null); //important pour placer manuellement
+        imgManche.setLayout(null);
 
-        imgManche.setLayout(new GridBagLayout());
-
-
-        //Pioche
-        c = new GridBagConstraints();
-
+        //Réutilisation de notre liste de JLabel de l'initialisation pour pouvoir afficher le nom des joueurs
         labelJoueurs = new ArrayList<JLabel>();
         for(int i =0 ; i <partie.getNbJoueurs() ; i++){
-            labelJoueurs.add(new JLabel(partie.getJoueurs(i).getNom()));
-        }//Définition des labels joueurs
+            JLabel swap;
+            if(i==0){
+                //Différenciation du joueur humain
+                swap =new JLabel(partie.getJoueurs(i).getNom()+" : "+partie.getJoueurs(i).getJeton());
+                swap.setForeground(Color.red);
+            }else{
+                swap =new JLabel(partie.getJoueurs(i).getNom());
+                swap.setForeground(Color.green);
+            }
+            labelJoueurs.add(swap);
+        }
+
+        //Placement des éléments qui ne bouge pas selon le nombre de joueurs
+        //Humain
+        labelJoueurs.get(0).setBounds(15,695,100,31-5);
+        imgManche.add(labelJoueurs.get(0));
+        //courante
+        carteCourante.setBounds(625-51-5,310,51,84);
+        imgManche.add(carteCourante);
+        //pioche
+        piocheLabel.setBounds(625+51+5,310,51,84);
+        imgManche.add(piocheLabel);
+        //joueurs 2
+        labelJoueurs.get(1).setBounds(15,0,100,31-5);
+        imgManche.add(labelJoueurs.get(1));
+        //joueurs 3
+        labelJoueurs.get(2).setBounds(625+15,695,100,31-5);
+        imgManche.add(labelJoueurs.get(2));
+
+
 
         //Squelette de placement pour le jeu selon le nombre de joueurs
         switch(partie.getNbJoueurs()){
             case 4:
-
-
-                //J haut gauche
-                c.gridx=0;
-                c.gridy=0;
-                c.gridwidth=2;
-
-                labelJoueurs.get(1).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(1),c);
-                //Jhaut droite
-                c.gridx=2;
-                c.gridy=0;
-                c.gridwidth=2;
-
-                labelJoueurs.get(2).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(2),c);
-                //Zone JhGauche
-                c.gridx=0;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                c.gridwidth=2;
-                imgManche.add(new JButton("Zone jeu j1"),c);
-                //Zone Jhdroite
-                c.gridx=2;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                c.gridwidth=2;
-                imgManche.add(new JButton("Zone jeu j2"),c);
-
-                //Carte Courante
-                c.gridx=0;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(carte1,c);
-                //pioche
-                c.gridx=2;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(piocheLabel, c);
-
-                //Zone Jeu humain bas gauche
-                c.gridx=0;
-                c.gridy=3;
-                c.gridwidth=2;
-                c.gridwidth = GridBagConstraints.HORIZONTAL;
-                imgManche.add(new JButton("Zone jeu humain"),c);
-
-                //Zone jeu joueurs 2 bas droite
-                c.gridx=2;
-                c.gridy=3;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                c.gridwidth=2;
-                imgManche.add(new JButton("Zone jeu j3"),c);
-
-                //hud humain
-                c.gridx=0;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(0).setForeground(Color.red);
-                labelJoueurs.get(0).setText(labelJoueurs.get(0).getText()+" : "+partie.getJoueurs(0).getJeton());
-                imgManche.add(labelJoueurs.get(0),c);
-                //hud j2
-                c.gridx=2;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(3).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(3),c);
+                //joueurs 4
+                labelJoueurs.get(3).setBounds(625+15,0,100,31-5);
+                imgManche.add(labelJoueurs.get(3));
                 break;
             case 5:
-
-                //J haut gauche
-                c.gridx=0;
-                c.gridy=0;
-                labelJoueurs.get(1).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(1),c);
-                //JhautCentre
-                c.gridx=1;
-                c.gridy=0;
-
-                labelJoueurs.get(2).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(2),c);
-                //Jhaut droite
-                c.gridx=2;
-                c.gridy=0;
-
-                labelJoueurs.get(3).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(3),c);
-
-                //Zone JhGauche
-                c.gridx=0;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                imgManche.add(new JButton("Zone jeu j1"),c);
-                //Zone JhCentre
-                c.gridx=1;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                imgManche.add(new JButton("Zone jeu j2"),c);
-                //Zone Jhdroite
-                c.gridx=2;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                imgManche.add(new JButton("Zone jeu j3"),c);
-
-                //Carte Courante
-                c.gridx=0;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(carte1,c);
-                //pioche
-                c.gridx=2;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(piocheLabel, c);
-
-                //Zone Jeu humain bas gauche
-                c.gridx=0;
-                c.gridy=3;
-
-                imgManche.add(new JButton("Zone jeu humain"),c);
-
-                //Zone jeu joueurs 2 bas droite
-                c.gridx=2;
-                c.gridy=3;
-
-                imgManche.add(new JButton("Zone jeu j4"),c);
-
-                //hud humain
-                c.gridx=0;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(0).setForeground(Color.red);
-                labelJoueurs.get(0).setText(labelJoueurs.get(0).getText()+" : "+partie.getJoueurs(0).getJeton());
-                imgManche.add(labelJoueurs.get(0),c);
-                //hud j2
-                c.gridx=2;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(4).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(4),c);
+                //joueurs 4
+                labelJoueurs.get(3).setBounds(416+15,0,100,31-5);
+                imgManche.add(labelJoueurs.get(3));
+                //joueurs 5
+                labelJoueurs.get(4).setBounds(832+15,0,100,31-5);
+                imgManche.add(labelJoueurs.get(4));
                 break;
-            default:
 
-
-
-                //J haut gauche
-                c.gridx=0;
-                c.gridy=0;
-                c.gridwidth=4;
-                c.anchor=GridBagConstraints.LINE_START;
-                labelJoueurs.get(1).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(1),c);
-                //Zone JhGauche
-                c.gridx=0;
-                c.gridy=1;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                c.gridwidth=4;
-                imgManche.add(new JButton("Zone jeu j1"),c);
-
-                //Carte Courante
-                c.gridx=0;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(carte1,c);
-                //pioche
-                c.gridx=2;
-                c.gridy=2;
-                c.gridwidth=2;
-                imgManche.add(piocheLabel, c);
-
-                //Zone Jeu humain bas gauche
-                c.gridx=0;
-                c.gridy=3;
-                c.gridwidth=2;
-                c.gridwidth = GridBagConstraints.HORIZONTAL;
-                imgManche.add(new JButton("Zone jeu humain"),c);
-
-                //Zone jeu joueurs 2 bas droite
-                c.gridx=2;
-                c.gridy=3;
-                c.fill = GridBagConstraints.HORIZONTAL;
-                c.gridwidth=2;
-                imgManche.add(new JButton("Zone jeu j2"),c);
-
-                //hud humain
-                c.gridx=0;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(0).setForeground(Color.red);
-                labelJoueurs.get(0).setText(labelJoueurs.get(0).getText()+" : "+partie.getJoueurs(0).getJeton());
-                imgManche.add(labelJoueurs.get(0),c);
-                //hud j2
-                c.gridx=2;
-                c.gridy=4;
-                c.gridwidth=2;
-                labelJoueurs.get(2).setForeground(Color.red);
-                imgManche.add(labelJoueurs.get(2),c);
-                break;
         }
-
-
-
-        global.add(imgManche, BorderLayout.CENTER);
-
-
+        imgManche.setBounds(0,0,1280,770);
+        global.add(imgManche);
         setContentPane(global);
-
         setSize(1280,770);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
-    public void afficherImageTest(){
-        //Fonction test pour afficher une manche
-        JLabel carte1 = new JLabel(new ImageIcon("3.png"));
-        imgManche.add(carte1);
+    public void nouvelleManche() {
+
+        //Pour les placements manuel : largeur 1250, hauteur 695, basé vous la dessus ça marche
+        //Chargement fond
+        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
+
+        //Lancement d'une nouvelle manche
+        Manche m = new Manche();
+        affichageDebutManche();
+
+
     }
 
 
@@ -390,7 +224,8 @@ public class Fenetre extends JFrame{
 
         //placement des widgets de la fenêtre
         for(int i = 0 ; i<champsJoueurs.size() ; i++){
-            labelJoueurs.get(i).setText("Joueur"+(i+1));
+            if(i==0) labelJoueurs.get(i).setText("Votre Nom");
+            else labelJoueurs.get(i).setText("Joueur"+(i+1));
             champsJoueurs.get(i).setColumns(15);
             pan.add(labelJoueurs.get(i));
             pan.add(champsJoueurs.get(i));
