@@ -21,4 +21,7 @@ public class Carte {
         return jetons;
     }
 
+    public int getValue() {
+        return point;
+    }
 }

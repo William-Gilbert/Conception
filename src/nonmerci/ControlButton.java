@@ -59,11 +59,11 @@ public class ControlButton implements ActionListener {
                     // remplace le texte pour avertir qu'il ne doit pas être vide
                     //Pour tester plus vite
                     fen.champsJoueurs.get(i).setText("bob");
-                    fen.labelJoueurs.get(i).setText("Joueurs "+(i+1)+"(carotte vide)");
+                    fen.labelJoueurs.get(i).setText("Joueurs "+(i+1)+"(champ vide)");
                     fen.champsJoueurs.get(i).repaint();
                 }
             }
-            //testkjhkj
+
             jetonsInit = fen.nbjet.getText();
             if(jetonsInit.equals("") || Integer.parseInt(jetonsInit)>11){
                 passeralasuite=false;

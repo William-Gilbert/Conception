@@ -19,6 +19,7 @@ public class Fenetre extends JFrame{
     public JButton boutonQuitter;
     //Données
     public Partie partie;
+    public Manche m;
     public ArrayList<JTextField> champsJoueurs;
     public ArrayList<JLabel> labelJoueurs;
     public ArrayList<String> nomsInit;
@@ -120,8 +121,13 @@ public class Fenetre extends JFrame{
 
     public void affichageDebutManche(){
         //Label de placement
-        JLabel piocheLabel = new JLabel(new ImageIcon("pioche.jpg"));
-        JLabel carteCourante = new JLabel(new ImageIcon("3.jpg"));//Carte courante
+        JLabel piocheLabel = new JLabel(new ImageIcon("carte/pioche.png"));
+
+        Carte maCarteCourante = m.piocher(); //retourne la carte piocher et la supprime de la pioche
+
+        JLabel carteCourante = new JLabel(new ImageIcon("carte/"+maCarteCourante.getValue()+".png"));//Carte courante
+
+
         global = new JPanel();
         global.setLayout(null); //important pour placer manuellement
         imgManche.setLayout(null);
@@ -193,7 +199,7 @@ public class Fenetre extends JFrame{
         imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
 
         //Lancement d'une nouvelle manche
-        Manche m = new Manche();
+        m = new Manche();
         affichageDebutManche();
 
 
