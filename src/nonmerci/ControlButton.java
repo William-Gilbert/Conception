@@ -86,6 +86,10 @@ public class ControlButton implements ActionListener {
 
             }
         }
+        if(e.getSource()==fen.accepteCarte) {
+            System.out.print("hello");
+        }
+
     }
 
 

@@ -17,6 +17,8 @@ public class Fenetre extends JFrame{
     public JButton confirmerJoueurs;
     public JButton boutonLancer;
     public JButton boutonQuitter;
+    public JButton accepteCarte;
+    public JButton refuseCarte;
     //Données
     public Partie partie;
     public Manche m;
@@ -157,6 +159,15 @@ public class Fenetre extends JFrame{
         //pioche
         piocheLabel.setBounds(625+51+5,310,51,84);
         imgManche.add(piocheLabel);
+        //bouton accepte
+        accepteCarte =new JButton("Prendre carte");
+        accepteCarte.setBounds(470,400,150,30);
+        accepteCarte.addActionListener(controlButton);
+        imgManche.add(accepteCarte);
+        //bouton refuse
+        refuseCarte =new JButton("Passer");
+        refuseCarte.setBounds(670,400,150,30);
+        imgManche.add(refuseCarte);
         //joueurs 2
         labelJoueurs.get(1).setBounds(15,0,100,31-5);
         imgManche.add(labelJoueurs.get(1));
