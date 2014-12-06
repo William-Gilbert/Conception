@@ -16,6 +16,7 @@ public class Fenetre extends JFrame{
     //Boutons
     public JButton confirmerJoueurs;
     public JButton boutonLancer;
+    public JButton boutonAPropos;
     public JButton boutonQuitter;
     public JButton accepteCarte;
     public JButton refuseCarte;
@@ -52,11 +53,16 @@ public class Fenetre extends JFrame{
 
         fondMenuPrincipal.setLayout(new BoxLayout(fondMenuPrincipal, BoxLayout.Y_AXIS));//aligner verticalement
         boutonLancer.setAlignmentX(CENTER_ALIGNMENT);//centrer les boutons
+        boutonAPropos.setAlignmentX(CENTER_ALIGNMENT);
         boutonQuitter.setAlignmentX(CENTER_ALIGNMENT);
+
         fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,20)));//ajouter de l'espace entre les boutons
         fondMenuPrincipal.add(boutonLancer);
         fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,5)));
+        fondMenuPrincipal.add(boutonAPropos);
+        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,5)));
         fondMenuPrincipal.add(boutonQuitter);
+
 
         global.add(fondMenuPrincipal);
         setContentPane(global);
@@ -74,7 +80,9 @@ public class Fenetre extends JFrame{
         confirmerJoueurs = new JButton("Confirmer");
         boutonLancer = new JButton("Démarrer le jeu");
         boutonQuitter = new JButton("Quitter");
+        boutonAPropos = new JButton("À propos");
         boutonLancer.addActionListener(controlButton);
+        boutonAPropos.addActionListener(controlButton);
         boutonQuitter.addActionListener(controlButton);
 
 

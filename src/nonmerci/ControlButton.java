@@ -90,6 +90,21 @@ public class ControlButton implements ActionListener {
             System.out.print("hello");
         }
 
+        if(e.getSource()==fen.boutonAPropos){
+            JFrame apropos = new JFrame();
+            JPanel panContenu = new JPanel();
+            JLabel contenu = new JLabel("<html>Jeu de Carte non Merci<br><br> " +
+                    "Proposé par :<br>El Houssine Jawad<br>Gilbert William<br>Guyon Loan<br>" +
+                    "Morel Sylvain<br>Sauner Alexandre<br>Valet Thomas<br>Viennent William</html>");
+
+            apropos.setTitle("A propos");
+            apropos.setVisible(true);
+            apropos.setSize(200, 300);
+            apropos.setLocationRelativeTo(null);
+            panContenu.add(contenu);
+            apropos.setContentPane(panContenu);
+        }
+
     }
 
 
