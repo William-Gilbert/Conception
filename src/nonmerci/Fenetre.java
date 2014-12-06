@@ -34,6 +34,8 @@ public class Fenetre extends JFrame{
     //Timer
     JLabel labelTime;
 
+    public Carte maCarteCourante;
+    public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
 
     public Fenetre(){
         init();
@@ -86,16 +88,12 @@ public class Fenetre extends JFrame{
         boutonQuitter.addActionListener(controlButton);
 
 
-
         quitterItem = new JMenuItem("Quitter");
         apropos = new JMenuItem("À propos");
         nouveauItem = new JMenuItem("Nouvelle partie");
         nouveauItem.addActionListener(controlMenu);
         apropos.addActionListener(controlMenu);
         quitterItem.addActionListener(controlMenu);
-
-
-
 
     }
 
@@ -130,10 +128,13 @@ public class Fenetre extends JFrame{
     }
 
     public void affichageDebutManche(){
+        //Pour les placements manuel : largeur 1250, hauteur 695, basé vous la dessus ça marche
+        //Chargement fond
+        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
+
+
         //Label de placement
         JLabel piocheLabel = new JLabel(new ImageIcon("carte/pioche.png"));
-
-        Carte maCarteCourante = m.piocher(); //retourne la carte piocher et la supprime de la pioche
 
         JLabel carteCourante = new JLabel(new ImageIcon("carte/"+maCarteCourante.getValue()+".png"));//Carte courante
 
@@ -162,11 +163,15 @@ public class Fenetre extends JFrame{
         labelJoueurs.get(0).setBounds(15,695,100,31-5);
         imgManche.add(labelJoueurs.get(0));
         //courante
-        carteCourante.setBounds(625-51-5,310,51,84);
-        imgManche.add(carteCourante);
+        if(m.sizePioche()>0 || uneCarteCourante) {
+            carteCourante.setBounds(625 - 51 - 5, 310, 51, 84);
+            imgManche.add(carteCourante);
+        }
         //pioche
-        piocheLabel.setBounds(625+51+5,310,51,84);
-        imgManche.add(piocheLabel);
+        if(m.sizePioche()>0) {
+            piocheLabel.setBounds(625 + 51 + 5, 310, 51, 84);
+            imgManche.add(piocheLabel);
+        }
         //bouton accepte
         accepteCarte =new JButton("Prendre carte");
         accepteCarte.setBounds(470,400,150,30);
@@ -213,12 +218,10 @@ public class Fenetre extends JFrame{
 
     public void nouvelleManche() {
 
-        //Pour les placements manuel : largeur 1250, hauteur 695, basé vous la dessus ça marche
-        //Chargement fond
-        imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
-
         //Lancement d'une nouvelle manche
         m = new Manche();
+        maCarteCourante = m.piocher(); //retourne la carte piocher et la supprime de la pioche
+        uneCarteCourante=true;
         affichageDebutManche();
 
 
