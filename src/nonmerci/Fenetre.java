@@ -36,6 +36,8 @@ public class Fenetre extends JFrame{
 
     public Carte maCarteCourante;
     public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
+    Joueur j1;
+
 
     public Fenetre(){
         init();
@@ -207,6 +209,21 @@ public class Fenetre extends JFrame{
                 break;
 
         }
+        JLabel carteJoueur;
+        int x=30;
+        int y=400;
+        for(int i=0;i<j1.nbCartes();i++) {
+            Carte afficheCarte = j1.getCartes(i);
+            carteJoueur = new JLabel(new ImageIcon("carte/" + afficheCarte.getValue() + ".png"));
+            carteJoueur.setBounds(x, y, 51, 84);
+            x+=55;
+            imgManche.add(carteJoueur);
+            if (i%8==7){
+                y+=100;
+                x=30;
+            }
+        }
+
         imgManche.setBounds(0,0,1280,770);
         global.add(imgManche);
         setContentPane(global);
@@ -222,6 +239,7 @@ public class Fenetre extends JFrame{
         m = new Manche();
         maCarteCourante = m.piocher(); //retourne la carte piocher et la supprime de la pioche
         uneCarteCourante=true;
+        j1 =partie.getJoueurs(0);
         affichageDebutManche();
 
 

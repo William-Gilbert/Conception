@@ -75,4 +75,8 @@ public class Joueur {
     public String getNom() {
         return nom;
     }
+
+    public Carte getCartes(int index) {
+        return main.get(index);
+    }
 }

@@ -88,8 +88,7 @@ public class ControlButton implements ActionListener {
         }
         if(e.getSource()==fen.accepteCarte) {
             if(fen.m.sizePioche()>0 || fen.uneCarteCourante) {
-                Joueur j1=partie.getJoueurs(0);
-                j1.accepteCarte(fen.maCarteCourante);
+                fen.j1.accepteCarte(fen.maCarteCourante);
 
                 if(fen.m.sizePioche()>0) {
                     fen.maCarteCourante = fen.m.piocher();
@@ -97,7 +96,7 @@ public class ControlButton implements ActionListener {
                 else{
                     fen.uneCarteCourante=false;
                 }
-
+                System.out.print(fen.j1.nbCartes());
                     fen. affichageDebutManche();
             }
         }
