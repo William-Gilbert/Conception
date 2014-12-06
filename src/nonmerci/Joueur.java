@@ -71,4 +71,8 @@ public class Joueur {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public String getNom() {
+        return nom;
+    }
 }

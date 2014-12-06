@@ -25,6 +25,8 @@ public class Partie {
         return joueurs.get(index);
     }
 
+    public ArrayList<Joueur> getAllJoueurs(){return joueurs;}
+
     public int getNbJoueurs() {
         return nbJoueurs;
     }
