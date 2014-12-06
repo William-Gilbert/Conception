@@ -63,7 +63,7 @@ public class ControlButton implements ActionListener {
                     fen.champsJoueurs.get(i).repaint();
                 }
             }
-
+            //testkjhkj
             jetonsInit = fen.nbjet.getText();
             if(jetonsInit.equals("") || Integer.parseInt(jetonsInit)>11){
                 passeralasuite=false;
