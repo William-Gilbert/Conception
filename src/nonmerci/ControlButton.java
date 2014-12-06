@@ -91,16 +91,12 @@ public class ControlButton implements ActionListener {
                 Joueur j1=partie.getJoueurs(0);
                 j1.accepteCarte(fen.maCarteCourante);
 
-                System.out.println(fen.maCarteCourante.getValue());
                 if(fen.m.sizePioche()>0) {
                     fen.maCarteCourante = fen.m.piocher();
                 }
                 else{
                     fen.uneCarteCourante=false;
                 }
-                System.out.println(fen.m.sizePioche());
-                System.out.println(j1.nbCartes());
-                System.out.println(j1.nbPoints());
 
                     fen. affichageDebutManche();
             }
