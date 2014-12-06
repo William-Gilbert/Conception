@@ -212,6 +212,8 @@ public class Fenetre extends JFrame{
         JLabel carteJoueur;
         int x=30;
         int y=400;
+        if(j1.nbCartes()<9) y+=100;
+        if(j1.nbCartes()<17) y+=100;
         for(int i=0;i<j1.nbCartes();i++) {
             Carte afficheCarte = j1.getCartes(i);
             carteJoueur = new JLabel(new ImageIcon("carte/" + afficheCarte.getValue() + ".png"));
