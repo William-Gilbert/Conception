@@ -269,7 +269,7 @@ public class Fenetre extends JFrame{
                 carteJoueur.setBounds(x, y, 51, 84);
                 x += 55;
                 imgManche.add(carteJoueur);
-                if (i % 5 == 0 && i!=0) {
+                if (i % 6 == 5 ) {
                     y += 100;
                     if (z == 0) {
                         x = 210;
