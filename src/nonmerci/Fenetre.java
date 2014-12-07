@@ -216,16 +216,38 @@ public class Fenetre extends JFrame{
             int x=0;
             int y=0;
             Joueur jActuelle = partie.getJoueurs(z);
-            if (z == 0) {
-                x = 30;
-                y = 400;
-            } else if (z == 1) {
-                x = 30;
-                y = 100;
-            }
-            else if (z == 2) {
-                x = 600;
-                y = 400;
+
+            if(partie.getNbJoueurs()==5){
+                if (z == 0) {
+                    x = 30;
+                    y = 400;
+                } else if (z == 1) {
+                    x = 30;
+                    y = 100;
+                } else if (z == 2) {
+                    x = 600;
+                    y = 400;
+                } else if (z == 3) {
+                    x = 431;
+                    y = 100;
+                }else if( z==4){
+                    x = 847 ;
+                    y = 100;
+                }
+            }else {
+                if (z == 0) {
+                    x = 30;
+                    y = 400;
+                } else if (z == 1) {
+                    x = 30;
+                    y = 100;
+                } else if (z == 2) {
+                    x = 600;
+                    y = 400;
+                } else if (z == 3) {
+                    x = 600;
+                    y = 100;
+                }
             }
             if (jActuelle.nbCartes() < 9) y += 100;
             if (jActuelle.nbCartes() < 17) y += 100;
@@ -243,6 +265,9 @@ public class Fenetre extends JFrame{
                         x = 30;
                     }
                     else if (z == 2) {
+                        x = 600;
+                    }
+                    else if(z==3){
                         x = 600;
                     }
                 }
@@ -274,7 +299,95 @@ public class Fenetre extends JFrame{
                 }
                 affichageCartesJoueurs();
             }
+
+            if(m.sizePioche()>0 || uneCarteCourante) {
+                partie.getJoueurs(1).accepteCarte(maCarteCourante);
+                if (m.sizePioche() > 0) {
+                    maCarteCourante =m.piocher();
+                } else {
+                    uneCarteCourante = false;
+                }
+                affichageCartesJoueurs();
+            }
         }
+
+        if(partie.getNbJoueurs()==4) {
+            //Joueur 2 joue
+
+            if (m.sizePioche() > 0 || uneCarteCourante) {
+                partie.getJoueurs(2).accepteCarte(maCarteCourante);
+                if (m.sizePioche() > 0) {
+                    maCarteCourante = m.piocher();
+                } else {
+                    uneCarteCourante = false;
+                }
+                affichageCartesJoueurs();
+            }
+
+            if (m.sizePioche() > 0 || uneCarteCourante) {
+                partie.getJoueurs(3).accepteCarte(maCarteCourante);
+                if (m.sizePioche() > 0) {
+                    maCarteCourante = m.piocher();
+                } else {
+                    uneCarteCourante = false;
+                }
+                affichageCartesJoueurs();
+            }
+
+            if (m.sizePioche() > 0 || uneCarteCourante) {
+                partie.getJoueurs(1).accepteCarte(maCarteCourante);
+                if (m.sizePioche() > 0) {
+                    maCarteCourante = m.piocher();
+                } else {
+                    uneCarteCourante = false;
+                }
+                affichageCartesJoueurs();
+            }
+        }
+
+        if(partie.getNbJoueurs()==5){
+             if(m.sizePioche()>0 || uneCarteCourante) {
+                 partie.getJoueurs(2).accepteCarte(maCarteCourante);
+                 if (m.sizePioche() > 0) {
+                    maCarteCourante =m.piocher();
+                 } else {
+                    uneCarteCourante = false;
+                 }
+                affichageCartesJoueurs();
+             }
+
+             if(m.sizePioche()>0 || uneCarteCourante) {
+                 partie.getJoueurs(4).accepteCarte(maCarteCourante);
+                 if (m.sizePioche() > 0) {
+                     maCarteCourante =m.piocher();
+                 } else {
+                     uneCarteCourante = false;
+                 }
+                 affichageCartesJoueurs();
+             }
+
+             if(m.sizePioche()>0 || uneCarteCourante) {
+                 partie.getJoueurs(3).accepteCarte(maCarteCourante);
+                 if (m.sizePioche() > 0) {
+                     maCarteCourante =m.piocher();
+                 } else {
+                     uneCarteCourante = false;
+                 }
+                 affichageCartesJoueurs();
+             }
+
+
+             if(m.sizePioche()>0 || uneCarteCourante) {
+                 partie.getJoueurs(1).accepteCarte(maCarteCourante);
+                 if (m.sizePioche() > 0) {
+                     maCarteCourante =m.piocher();
+                 } else {
+                     uneCarteCourante = false;
+                 }
+                 affichageCartesJoueurs();
+             }
+        }
+
     }
 
 
