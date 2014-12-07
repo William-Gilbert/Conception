@@ -260,6 +260,7 @@ public class Fenetre extends JFrame{
                     y = -50;
                 }
             }
+            if( z==0) System.out.println(jActuelle.nbCartes());
             if (jActuelle.nbCartes() < 7) y += 100;
             if (jActuelle.nbCartes() < 13) y += 100;
             for (int i = 0; i < jActuelle.nbCartes(); i++) {
