@@ -106,7 +106,6 @@ public class ControlButton implements ActionListener {
         if(e.getSource()==fen.refuseCarte) {
             if(fen.m.sizePioche()>0 || fen.uneCarteCourante) {
                 fen.partie.getJoueurs(0).refuse(fen.maCarteCourante);
-                System.out.println(fen.partie.getJoueurs(2).getJeton());
                 fen.affichageCartesJoueurs();
                 fen.IA();
             }
