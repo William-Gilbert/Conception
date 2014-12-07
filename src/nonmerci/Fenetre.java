@@ -130,6 +130,9 @@ public class Fenetre extends JFrame{
 
         JLabel carteCourante = new JLabel(new ImageIcon("image/carte/"+maCarteCourante.getValue()+".png"));//Carte courante
 
+        JLabel jeton = new JLabel(new ImageIcon("image/carte/jeton.png"));
+
+        JLabel nbJet = new JLabel(String.valueOf(maCarteCourante.getJeton()));
 
         global = new JPanel();
         global.setLayout(null); //important pour placer manuellement
@@ -173,6 +176,7 @@ public class Fenetre extends JFrame{
         refuseCarte =new JButton("Passer");
         refuseCarte.setBounds(670,400,150,30);
         refuseCarte.addActionListener(controlButton);
+        if(partie.getJoueurs(0).getJeton()<=0) {refuseCarte.setEnabled(false);;}
         imgManche.add(refuseCarte);
         //joueurs 2
         labelJoueurs.get(1).setBounds(15,0,100,31-5);
@@ -180,7 +184,13 @@ public class Fenetre extends JFrame{
         //joueurs 3
         labelJoueurs.get(2).setBounds(625+15,695,100,31-5);
         imgManche.add(labelJoueurs.get(2));
-
+        //jeton
+        if(maCarteCourante.getJeton()>0){
+            jeton.setBounds(500, 350, 32, 32);
+            imgManche.add(jeton);
+            nbJet.setBounds(480, 350, 200, 50);
+            imgManche.add(nbJet);
+        }
 
         //Squelette de placement pour le jeu selon le nombre de joueurs
         switch(partie.getNbJoueurs()){
@@ -274,9 +284,6 @@ public class Fenetre extends JFrame{
                 }
             }
 
-            if (jActuelle.getJeton() == 0) {
-                accepteCarte.setEnabled(false);
-            }
         }
 
         if(!uneCarteCourante){
@@ -290,18 +297,20 @@ public class Fenetre extends JFrame{
     public void IA() {
         if(partie.getNbJoueurs()==3){
             //Joueur 2 joue
-
+            boolean choix;
             if(m.sizePioche()>0 || uneCarteCourante) {
-                partie.getJoueurs(2).accepteCarte(maCarteCourante);
-                if (m.sizePioche() > 0) {
-                    maCarteCourante =m.piocher();
-                } else {
-                    uneCarteCourante = false;
+                choix=partie.getJoueurs(2).refuse(maCarteCourante);
+                if (choix==false){
+                    if (m.sizePioche() > 0) {
+                        maCarteCourante = m.piocher();
+                    } else {
+                        uneCarteCourante = false;
+                    }
                 }
                 affichageCartesJoueurs();
             }
 
-            if(m.sizePioche()>0 || uneCarteCourante) {
+            /*if(m.sizePioche()>0 || uneCarteCourante) {
                 partie.getJoueurs(1).accepteCarte(maCarteCourante);
                 if (m.sizePioche() > 0) {
                     maCarteCourante =m.piocher();
@@ -309,7 +318,7 @@ public class Fenetre extends JFrame{
                     uneCarteCourante = false;
                 }
                 affichageCartesJoueurs();
-            }
+            }*/
         }
 
         if(partie.getNbJoueurs()==4) {
