@@ -43,31 +43,23 @@ public class Fenetre extends JFrame{
         init();
         creerMenu();
         creerMenuPrincipal();
-
         setTitle("Non Merci!");
-        setSize(212,300);
+        setSize(1280,770);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void creerMenuPrincipal() {
-        fondPanel fondMenuPrincipal= new fondPanel(new ImageIcon("fond.jpg").getImage());
+        fondPanel fondMenuPrincipal= new fondPanel(new ImageIcon("image/menu/fond.jpg").getImage());
         global.setLayout(new BorderLayout());   //Efface le Layout
-
-        fondMenuPrincipal.setLayout(new BoxLayout(fondMenuPrincipal, BoxLayout.Y_AXIS));//aligner verticalement
-        boutonLancer.setAlignmentX(CENTER_ALIGNMENT);//centrer les boutons
-        boutonAPropos.setAlignmentX(CENTER_ALIGNMENT);
-        boutonQuitter.setAlignmentX(CENTER_ALIGNMENT);
-
-        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,20)));//ajouter de l'espace entre les boutons
+        fondMenuPrincipal.setLayout(null);//aligner verticalement
+        boutonLancer.setBounds(165,280,107,31);//centrer les boutons
+        boutonAPropos.setBounds(169,320,97,27);
+        boutonQuitter.setBounds(169,390,97,31);
         fondMenuPrincipal.add(boutonLancer);
-        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,5)));
         fondMenuPrincipal.add(boutonAPropos);
-        fondMenuPrincipal.add(Box.createRigidArea(new Dimension(0,5)));
         fondMenuPrincipal.add(boutonQuitter);
-
-
         global.add(fondMenuPrincipal);
         setContentPane(global);
         pack();
@@ -82,9 +74,9 @@ public class Fenetre extends JFrame{
         controlButton = new ControlButton(this,partie);
 
         confirmerJoueurs = new JButton("Confirmer");
-        boutonLancer = new JButton("Démarrer le jeu");
-        boutonQuitter = new JButton("Quitter");
-        boutonAPropos = new JButton("À propos");
+        boutonLancer = new JButton(new ImageIcon("image/menu/jouer.png"));
+        boutonQuitter = new JButton(new ImageIcon("image/menu/quitter.png"));
+        boutonAPropos = new JButton(new ImageIcon("image/menu/apropos.png"));
         boutonLancer.addActionListener(controlButton);
         boutonAPropos.addActionListener(controlButton);
         boutonQuitter.addActionListener(controlButton);
@@ -106,7 +98,7 @@ public class Fenetre extends JFrame{
         creerMenu();
         creerMenuPrincipal();
         setTitle("Non Merci!");
-        setSize(212,300);
+        setSize(1280,770);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,6 +121,8 @@ public class Fenetre extends JFrame{
         setJMenuBar(barMenu);
     }
 
+
+
     public void affichageDebutManche(){
         //Pour les placements manuel : largeur 1250, hauteur 695, basé vous la dessus ça marche
         //Chargement fond
@@ -136,9 +130,9 @@ public class Fenetre extends JFrame{
 
 
         //Label de placement
-        JLabel piocheLabel = new JLabel(new ImageIcon("carte/pioche.png"));
+        JLabel piocheLabel = new JLabel(new ImageIcon("image/carte/pioche.png"));
 
-        JLabel carteCourante = new JLabel(new ImageIcon("carte/"+maCarteCourante.getValue()+".png"));//Carte courante
+        JLabel carteCourante = new JLabel(new ImageIcon("image/carte/"+maCarteCourante.getValue()+".png"));//Carte courante
 
 
         global = new JPanel();
@@ -216,7 +210,7 @@ public class Fenetre extends JFrame{
         if(j1.nbCartes()<17) y+=100;
         for(int i=0;i<j1.nbCartes();i++) {
             Carte afficheCarte = j1.getCartes(i);
-            carteJoueur = new JLabel(new ImageIcon("carte/" + afficheCarte.getValue() + ".png"));
+            carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
             carteJoueur.setBounds(x, y, 51, 84);
             x+=55;
             imgManche.add(carteJoueur);
