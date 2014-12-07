@@ -230,56 +230,56 @@ public class Fenetre extends JFrame{
 
             if(partie.getNbJoueurs()==5){
                 if (z == 0) {
-                    x = 30;
+                    x = 210;
                     y = 400;
                 } else if (z == 1) {
-                    x = 30;
-                    y = 100;
+                    x = 210;
+                    y = -50;
                 } else if (z == 2) {
-                    x = 600;
+                    x = 800;
                     y = 400;
                 } else if (z == 3) {
-                    x = 431;
-                    y = 100;
+                    x = 530;
+                    y = -50;
                 }else if( z==4){
                     x = 847 ;
-                    y = 100;
+                    y = -50;
                 }
             }else {
                 if (z == 0) {
-                    x = 30;
+                    x = 210;
                     y = 400;
                 } else if (z == 1) {
-                    x = 30;
-                    y = 100;
+                    x = 210;
+                    y = -50;
                 } else if (z == 2) {
-                    x = 600;
+                    x = 800;
                     y = 400;
                 } else if (z == 3) {
-                    x = 600;
-                    y = 100;
+                    x = 800;
+                    y = -50;
                 }
             }
-            if (jActuelle.nbCartes() < 9) y += 100;
-            if (jActuelle.nbCartes() < 17) y += 100;
+            if (jActuelle.nbCartes() < 7) y += 100;
+            if (jActuelle.nbCartes() < 13) y += 100;
             for (int i = 0; i < jActuelle.nbCartes(); i++) {
                 Carte afficheCarte = jActuelle.getCartes(i);
                 carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
                 carteJoueur.setBounds(x, y, 51, 84);
                 x += 55;
                 imgManche.add(carteJoueur);
-                if (i % 8 == 7) {
+                if (i % 5 == 0 && i!=0) {
                     y += 100;
                     if (z == 0) {
-                        x = 30;
+                        x = 210;
                     } else if (z == 1) {
-                        x = 30;
+                        x = 210;
                     }
                     else if (z == 2) {
-                        x = 600;
+                        x = 800;
                     }
                     else if(z==3){
-                        x = 600;
+                        x = 800;
                     }
                 }
             }
@@ -310,7 +310,7 @@ public class Fenetre extends JFrame{
                 affichageCartesJoueurs();
             }
 
-            /*if(m.sizePioche()>0 || uneCarteCourante) {
+            if(m.sizePioche()>0 || uneCarteCourante) {
                 partie.getJoueurs(1).accepteCarte(maCarteCourante);
                 if (m.sizePioche() > 0) {
                     maCarteCourante =m.piocher();
@@ -318,7 +318,7 @@ public class Fenetre extends JFrame{
                     uneCarteCourante = false;
                 }
                 affichageCartesJoueurs();
-            }*/
+            }
         }
 
         if(partie.getNbJoueurs()==4) {
