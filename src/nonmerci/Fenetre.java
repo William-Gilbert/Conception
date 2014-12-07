@@ -36,7 +36,6 @@ public class Fenetre extends JFrame{
 
     public Carte maCarteCourante;
     public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
-    Joueur j1;
 
 
     public Fenetre(){
@@ -121,14 +120,11 @@ public class Fenetre extends JFrame{
         setJMenuBar(barMenu);
     }
 
-
-
-    public void affichageDebutManche(){
+    public void affichageStatiqueManche(){
+        //Element graphique de la manche, indépendant du joueur
         //Pour les placements manuel : largeur 1250, hauteur 695, basé vous la dessus ça marche
         //Chargement fond
         imgManche=new fondPanel(new ImageIcon("table.jpg").getImage());
-
-
         //Label de placement
         JLabel piocheLabel = new JLabel(new ImageIcon("image/carte/pioche.png"));
 
@@ -185,7 +181,6 @@ public class Fenetre extends JFrame{
         imgManche.add(labelJoueurs.get(2));
 
 
-
         //Squelette de placement pour le jeu selon le nombre de joueurs
         switch(partie.getNbJoueurs()){
             case 4:
@@ -203,13 +198,25 @@ public class Fenetre extends JFrame{
                 break;
 
         }
+    }
+
+    public void actualiser(){
+        imgManche.setBounds(0,0,1280,770);
+        global.add(imgManche);
+        setContentPane(global);
+        setVisible(true);
+    }
+
+    public void affichageCartesJoueurs(Joueur j,int x_, int y_){
+
+        affichageStatiqueManche();
         JLabel carteJoueur;
-        int x=30;
-        int y=400;
-        if(j1.nbCartes()<9) y+=100;
-        if(j1.nbCartes()<17) y+=100;
-        for(int i=0;i<j1.nbCartes();i++) {
-            Carte afficheCarte = j1.getCartes(i);
+        int x=x_;
+        int y=y_;
+        if(j.nbCartes()<9) y+=100;
+        if(j.nbCartes()<17) y+=100;
+        for(int i=0;i<j.nbCartes();i++) {
+            Carte afficheCarte = j.getCartes(i);
             carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
             carteJoueur.setBounds(x, y, 51, 84);
             x+=55;
@@ -219,15 +226,35 @@ public class Fenetre extends JFrame{
                 x=30;
             }
         }
+        if(j.getJeton()==0){
+            accepteCarte.setEnabled(false);
+        }
 
-        imgManche.setBounds(0,0,1280,770);
-        global.add(imgManche);
-        setContentPane(global);
-        setSize(1280,770);
-        setResizable(false);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        if(!uneCarteCourante){
+            System.out.println("Partie terminé");
+        }
+
+        actualiser();
+
     }
+
+    public void IA() {
+        if(partie.getNbJoueurs()==3){
+            //Joueur 2 joue
+
+            if(m.sizePioche()>0) {
+                partie.getJoueurs(2).accepteCarte(maCarteCourante);
+                if (m.sizePioche() > 0) {
+                    maCarteCourante =m.piocher();
+                } else {
+                    uneCarteCourante = false;
+                }
+                affichageCartesJoueurs(partie.getJoueurs(2),600,400);
+            }
+        }
+    }
+
 
     public void nouvelleManche() {
 
@@ -235,10 +262,11 @@ public class Fenetre extends JFrame{
         m = new Manche();
         maCarteCourante = m.piocher(); //retourne la carte piocher et la supprime de la pioche
         uneCarteCourante=true;
-        j1 =partie.getJoueurs(0);
-        affichageDebutManche();
-
-
+        affichageStatiqueManche();
+        imgManche.setBounds(0,0,1280,770);
+        global.add(imgManche);
+        setContentPane(global);
+        setVisible(true);
     }
 
 
@@ -285,5 +313,6 @@ public class Fenetre extends JFrame{
 
         initialisation.setContentPane(pan);
     }
+
 
 }

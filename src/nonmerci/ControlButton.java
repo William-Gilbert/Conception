@@ -88,15 +88,19 @@ public class ControlButton implements ActionListener {
         }
         if(e.getSource()==fen.accepteCarte) {
             if(fen.m.sizePioche()>0 || fen.uneCarteCourante) {
-                fen.j1.accepteCarte(fen.maCarteCourante);
+                fen.partie.getJoueurs(0).accepteCarte(fen.maCarteCourante);
 
                 if(fen.m.sizePioche()>0) {
                     fen.maCarteCourante = fen.m.piocher();
                 }
                 else{
                     fen.uneCarteCourante=false;
+
                 }
-                    fen. affichageDebutManche();
+                    fen.affichageCartesJoueurs(partie.getJoueurs(0), 30, 400);
+
+                    fen.IA();
+
             }
         }
 
