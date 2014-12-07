@@ -172,6 +172,7 @@ public class Fenetre extends JFrame{
         //bouton refuse
         refuseCarte =new JButton("Passer");
         refuseCarte.setBounds(670,400,150,30);
+        refuseCarte.addActionListener(controlButton);
         imgManche.add(refuseCarte);
         //joueurs 2
         labelJoueurs.get(1).setBounds(15,0,100,31-5);
