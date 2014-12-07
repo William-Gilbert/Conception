@@ -185,12 +185,10 @@ public class Fenetre extends JFrame{
         labelJoueurs.get(2).setBounds(625+15,695,100,31-5);
         imgManche.add(labelJoueurs.get(2));
         //jeton
-        if(maCarteCourante.getJeton()>0){
             jeton.setBounds(500, 350, 32, 32);
             imgManche.add(jeton);
             nbJet.setBounds(480, 350, 200, 50);
             imgManche.add(nbJet);
-        }
 
         //Squelette de placement pour le jeu selon le nombre de joueurs
         switch(partie.getNbJoueurs()){
