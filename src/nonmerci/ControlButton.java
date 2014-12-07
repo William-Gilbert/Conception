@@ -72,6 +72,7 @@ public class ControlButton implements ActionListener {
             }
 
             if(passeralasuite) {
+                partie.videJoueur();
                 for(JTextField champs:fen.champsJoueurs){
                     j = new Joueur(champs.getText(), Integer.parseInt(jetonsInit));
                     partie.addJoueur(j);
@@ -82,7 +83,6 @@ public class ControlButton implements ActionListener {
 
 
                 fen.nouvelleManche();
-
 
             }
         }
@@ -96,7 +96,6 @@ public class ControlButton implements ActionListener {
                 else{
                     fen.uneCarteCourante=false;
                 }
-                System.out.print(fen.j1.nbCartes());
                     fen. affichageDebutManche();
             }
         }

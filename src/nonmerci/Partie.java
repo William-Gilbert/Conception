@@ -16,6 +16,9 @@ public class Partie {
         joueurs = new ArrayList<Joueur>();
     }
 
+    public void videJoueur() {
+        joueurs.clear();
+    }
 
     public void setNbJoueurs(int nbJoueurs_) {
         nbJoueurs = nbJoueurs_;
