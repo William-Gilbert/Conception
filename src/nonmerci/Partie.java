@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Created by William on 20/11/2014.
  */
 public class Partie {
-    private int nbJoueur;
     private ArrayList<Joueur> joueurs;
     private int nbJoueurs;
 

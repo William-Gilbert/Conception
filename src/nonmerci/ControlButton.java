@@ -97,7 +97,7 @@ public class ControlButton implements ActionListener {
                     fen.uneCarteCourante=false;
 
                 }
-                    fen.affichageCartesJoueurs(partie.getJoueurs(0), 30, 400);
+                    fen.affichageCartesJoueurs();
 
                     fen.IA();
 

@@ -207,29 +207,51 @@ public class Fenetre extends JFrame{
         setVisible(true);
     }
 
-    public void affichageCartesJoueurs(Joueur j,int x_, int y_){
+    public void affichageCartesJoueurs(){
 
         affichageStatiqueManche();
         JLabel carteJoueur;
-        int x=x_;
-        int y=y_;
-        if(j.nbCartes()<9) y+=100;
-        if(j.nbCartes()<17) y+=100;
-        for(int i=0;i<j.nbCartes();i++) {
-            Carte afficheCarte = j.getCartes(i);
-            carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
-            carteJoueur.setBounds(x, y, 51, 84);
-            x+=55;
-            imgManche.add(carteJoueur);
-            if (i%8==7){
-                y+=100;
-                x=30;
+
+        for(int z=0;z<partie.getNbJoueurs();z++) {
+            int x=0;
+            int y=0;
+            Joueur jActuelle = partie.getJoueurs(z);
+            if (z == 0) {
+                x = 30;
+                y = 400;
+            } else if (z == 1) {
+                x = 30;
+                y = 100;
+            }
+            else if (z == 2) {
+                x = 600;
+                y = 400;
+            }
+            if (jActuelle.nbCartes() < 9) y += 100;
+            if (jActuelle.nbCartes() < 17) y += 100;
+            for (int i = 0; i < jActuelle.nbCartes(); i++) {
+                Carte afficheCarte = jActuelle.getCartes(i);
+                carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
+                carteJoueur.setBounds(x, y, 51, 84);
+                x += 55;
+                imgManche.add(carteJoueur);
+                if (i % 8 == 7) {
+                    y += 100;
+                    if (z == 0) {
+                        x = 30;
+                    } else if (z == 1) {
+                        x = 30;
+                    }
+                    else if (z == 2) {
+                        x = 600;
+                    }
+                }
+            }
+
+            if (jActuelle.getJeton() == 0) {
+                accepteCarte.setEnabled(false);
             }
         }
-        if(j.getJeton()==0){
-            accepteCarte.setEnabled(false);
-        }
-
 
         if(!uneCarteCourante){
             System.out.println("Partie terminé");
@@ -243,14 +265,14 @@ public class Fenetre extends JFrame{
         if(partie.getNbJoueurs()==3){
             //Joueur 2 joue
 
-            if(m.sizePioche()>0) {
+            if(m.sizePioche()>0 || uneCarteCourante) {
                 partie.getJoueurs(2).accepteCarte(maCarteCourante);
                 if (m.sizePioche() > 0) {
                     maCarteCourante =m.piocher();
                 } else {
                     uneCarteCourante = false;
                 }
-                affichageCartesJoueurs(partie.getJoueurs(2),600,400);
+                affichageCartesJoueurs();
             }
         }
     }
