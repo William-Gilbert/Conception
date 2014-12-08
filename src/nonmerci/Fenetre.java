@@ -132,9 +132,12 @@ public class Fenetre extends JFrame{
 
         JLabel carteCourante = new JLabel(new ImageIcon("image/carte/"+maCarteCourante.getValue()+".png"));//Carte courante
 
-        JLabel jeton = new JLabel(new ImageIcon("image/carte/jeton.jpg"));
+        JLabel jeton = new JLabel(new ImageIcon("image/carte/jeton.png"));
 
         JLabel nbJet = new JLabel(String.valueOf(maCarteCourante.getJeton()));
+        Font font = new Font("Arial",Font.BOLD,25);
+        nbJet.setFont(font);
+        nbJet.setForeground(Color.red);
 
         global = new JPanel();
         global.setLayout(null); //important pour placer manuellement
@@ -178,7 +181,7 @@ public class Fenetre extends JFrame{
         refuseCarte =new JButton("Passer");
         refuseCarte.setBounds(670,400,150,30);
         refuseCarte.addActionListener(controlButton);
-        if(partie.getJoueurs(0).getJeton()<=0) {refuseCarte.setEnabled(false);;}
+        if(partie.getJoueurs(0).getJeton()<=0) {refuseCarte.setEnabled(false);}
         imgManche.add(refuseCarte);
         //joueurs 2
         labelJoueurs.get(1).setBounds(15,0,100,31-5);
@@ -188,9 +191,9 @@ public class Fenetre extends JFrame{
         imgManche.add(labelJoueurs.get(2));
         //jeton
         if(maCarteCourante.getJeton()>0){
-            jeton.setBounds(500, 350, 32, 32);
+            jeton.setBounds(480, 320, 78, 75);
             imgManche.add(jeton);
-            nbJet.setBounds(480, 350, 200, 50);
+            nbJet.setBounds(512, 334, 200, 50);
             imgManche.add(nbJet);
         }
 
@@ -287,13 +290,17 @@ public class Fenetre extends JFrame{
                 }
             }
 
+
+
         }
+        actualiser();
 
         if(!uneCarteCourante){
             System.out.println("Partie terminé");
         }
 
-        actualiser();
+
+
 
     }
 
@@ -321,6 +328,8 @@ public class Fenetre extends JFrame{
         //Joueur 2 joue
         boolean choix=false;
         for (int i = 1; i < partie.getNbJoueurs(); i++) {
+
+
             if (m.sizePioche() > 0 || uneCarteCourante) {
                 accOrDeny = r.nextInt(2);
                 if(accOrDeny==1) {
