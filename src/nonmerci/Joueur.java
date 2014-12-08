@@ -10,12 +10,12 @@ import java.util.List;
 public class Joueur {
 
     private int jetons;
-    private List<Carte> main;
+    public Suite main;
     private String nom;
 
     public Joueur(String nom_, int jeton_){
         jetons = jeton_;
-        main = new ArrayList<Carte>();
+        main = new Suite();
         nom = nom_;
     }
 
@@ -36,12 +36,12 @@ public class Joueur {
     }
 
     public void accepteCarte(Carte c) {
-        main.add(c);
+        main.ajouterCarte(c);
         jetons+=c.getJeton();
     }
 
     public int nbCartes(){
-            return main.size();
+        return main.nbCartes();
     }
 
     public void reset(){  //utilisé pour le test de nbpoints
@@ -50,22 +50,7 @@ public class Joueur {
     }
 
     public int nbPoints() {
-        List<Integer> pointTri = new ArrayList<Integer>();
-        int points = jetons;
-        int i = 0;
-        for (Carte aMain : main) {
-            pointTri.add(aMain.point);
-        }
-
-        Collections.sort(pointTri, Collections.reverseOrder());
-
-        while(!pointTri.isEmpty()){
-            if(!(pointTri.contains(pointTri.get(i)-1))){
-                points=-pointTri.get(i)+points;
-            }
-            pointTri.remove(i);
-        }
-        return points;
+        return main.nbPoints();
     }
 
     public void setNom(String nom) {

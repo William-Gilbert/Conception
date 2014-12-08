@@ -65,7 +65,7 @@ public class Fenetre extends JFrame{
         boutonhowtoplay.setBounds(150, 359, 125, 28);
         boutonhowtoplay.setBorderPainted(false);
 
-        boutonQuitter.setBounds(165,401,95,29);
+        boutonQuitter.setBounds(165, 401, 95, 29);
         boutonQuitter.setBorderPainted(false);
         fondMenuPrincipal.add(boutonLancer);
         fondMenuPrincipal.add(boutonAPropos);
@@ -295,7 +295,14 @@ public class Fenetre extends JFrame{
                 Carte afficheCarte = jActuelle.getCartes(i);
                 carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
                 carteJoueur.setBounds(x, y, 51, 84);
-                x += 55;
+
+                if (i < jActuelle.nbCartes()-1) {
+                    if ((jActuelle.getCartes(i).getValue() + 1) == jActuelle.getCartes(i + 1).getValue()) {
+                        x += 20;
+                    }
+                    else x += 55;
+                }else x += 55;
+
                 imgManche.add(carteJoueur);
                 if (i %6==5) {
 
