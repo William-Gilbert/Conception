@@ -13,6 +13,4 @@ public class MancheUnitTest {
         Assert.assertEquals(m.sizePioche(),24);
     }
 
-    @Test
-    public void piocherTest(){}
 }

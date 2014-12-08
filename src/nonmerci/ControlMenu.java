@@ -53,9 +53,7 @@ public class ControlMenu implements ActionListener {
         if(e.getSource()==fen.apropos) {
             JFrame apropos = new JFrame();
             JPanel panContenu = new JPanel();
-            JLabel contenu = new JLabel("<html>Jeu de Carte non Merci<br><br> " +
-                    "Proposé par :<br>El Houssine Jawad<br>Gilbert William<br>Guyon Loan<br>" +
-                    "Morel Sylvain<br>Sauner Alexandre<br>Valet Thomas<br>Viennent William</html>");
+            JLabel contenu = new JLabel(new ImageIcon("image/menu/aproposContenu.jpg"));
 
             apropos.setTitle("A propos");
             apropos.setVisible(true);
@@ -65,6 +63,35 @@ public class ControlMenu implements ActionListener {
             apropos.setContentPane(panContenu);
         }
 
+        if(e.getSource()==fen.howtoplay){
+            JFrame howtoplay = new JFrame();
+            JPanel panContenu = new JPanel();
+            JLabel contenu = new JLabel(new ImageIcon("image/menu/jouer.png"));
+            howtoplay.setLayout(null);
+            System.out.println("Test howtoplay reussi");
+          /*  JLabel contenu = new JLabel("<html> Le but : terminer avec le moins de points possible,<br>" +
+                    " les points correspondant à la valeur des cartes accumulées.<br><br>" +
+                    "\n" +
+                    "A votre tour de jeu, une carte du paquet est retournée.<br>" +
+                    " A tour de rôle les joueurs ont le choix de prendre la carte ou de passer son tour en <br>" +
+                    " \"payant\" un jeton (chacun débutant avec un stock de jetons). <br><br>" +
+                    "Le tour de table lorsqu'un joueur décide de prendre la carte et il récupère ainsi tous les jetons éventuellement accumulés.<br><br>" +
+                    " On retourne alors une nouvelle carte.\n" +
+                    "\n" +
+                    "Chaque carte acceptée fait perdre des points.<br>" +
+                    " Mais si vous reconstituez des suites, vous ne perdez que la valeur de la plus petite carte de la suite. <br><br>" +
+                    "Gérez au mieux vos jetons, car, de toute façon, il vous faudra accepter des cartes !</html>");*/
+            howtoplay.setTitle("Comment jouer ?");
+            howtoplay.setVisible(true);
+            howtoplay.setSize(800,250);
+            howtoplay.setLocationRelativeTo(null);
+            panContenu.add(contenu);
+            howtoplay.setContentPane(panContenu);
+
+        }
+
 
     }
+
+
 }

@@ -12,6 +12,7 @@ public class Fenetre extends JFrame{
     public JMenuItem nouveauItem;
     public JMenuItem quitterItem;
     public JMenuItem apropos;
+    public JMenuItem howtoplay;
     //Controlleurs
     public ControlMenu controlMenu;
     public ControlButton controlButton;
@@ -22,6 +23,7 @@ public class Fenetre extends JFrame{
     public JButton boutonQuitter;
     public JButton accepteCarte;
     public JButton refuseCarte;
+    public JButton boutonhowtoplay;
     //Données
     public Partie partie;
     public Manche m;
@@ -38,6 +40,7 @@ public class Fenetre extends JFrame{
 
     public Carte maCarteCourante;
     public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
+
 
 
     public Fenetre(){
@@ -59,10 +62,13 @@ public class Fenetre extends JFrame{
         boutonLancer.setBorderPainted(false);
         boutonAPropos.setBounds(165,320,96,28);
         boutonAPropos.setBorderPainted(false);
+        boutonhowtoplay.setBounds(165,350,96,28);
+
         boutonQuitter.setBounds(165,390,95,29);
         boutonQuitter.setBorderPainted(false);
         fondMenuPrincipal.add(boutonLancer);
         fondMenuPrincipal.add(boutonAPropos);
+        fondMenuPrincipal.add(boutonhowtoplay);
         fondMenuPrincipal.add(boutonQuitter);
         global.add(fondMenuPrincipal);
         setContentPane(global);
@@ -81,17 +87,21 @@ public class Fenetre extends JFrame{
         boutonLancer = new JButton(new ImageIcon("image/menu/jouer.jpg"));
         boutonQuitter = new JButton(new ImageIcon("image/menu/quitter.jpg"));
         boutonAPropos = new JButton(new ImageIcon("image/menu/apropos.jpg"));
+        boutonhowtoplay = new JButton("Aide");
         boutonLancer.addActionListener(controlButton);
         boutonAPropos.addActionListener(controlButton);
+        boutonhowtoplay.addActionListener(controlButton);
         boutonQuitter.addActionListener(controlButton);
 
 
         quitterItem = new JMenuItem("Quitter");
         apropos = new JMenuItem("À propos");
+        howtoplay = new JMenuItem("Comment jouer ?");
         nouveauItem = new JMenuItem("Nouvelle partie");
         nouveauItem.addActionListener(controlMenu);
         apropos.addActionListener(controlMenu);
         quitterItem.addActionListener(controlMenu);
+        howtoplay.addActionListener(controlMenu);
 
     }
 
@@ -119,6 +129,7 @@ public class Fenetre extends JFrame{
         jeuMenu.add(nouveauItem);
         jeuMenu.add(quitterItem);
         plusMenu.add(apropos);
+        plusMenu.add(howtoplay);
 
         barMenu.add(jeuMenu);
         barMenu.add(plusMenu);
@@ -331,6 +342,8 @@ public class Fenetre extends JFrame{
     public void IA() {
 
         int accOrDeny;
+        String tps="";
+
         Random r = new Random();
         ArrayList<Integer> ordreJeu = new ArrayList<Integer>();
 
@@ -351,8 +364,8 @@ public class Fenetre extends JFrame{
         }
         //Joueur 2 joue
         boolean choix=false;
-        for (int i = 1; i < partie.getNbJoueurs(); i++) {
 
+        for (int i = 1; i < partie.getNbJoueurs(); i++) {
 
             if (m.sizePioche() > 0 || uneCarteCourante) {
                 accOrDeny = r.nextInt(2);
@@ -401,11 +414,18 @@ public class Fenetre extends JFrame{
         initialisation = new JFrame();
         initialisation.setTitle("Initialisation");
         initialisation.setVisible(true);
-        initialisation.setSize(200, 300);
         initialisation.setLocationRelativeTo(null);
+        if(partie.getNbJoueurs()==3){
+            initialisation.setSize(200,280);
+        }else if(partie.getNbJoueurs()<=4){
+            initialisation.setSize(200,310);
+        }else if(partie.getNbJoueurs()<=5){
+            initialisation.setSize(200,360);
+        }
 
         //Création des champs par rapports au nombre de joueurs
         for(int i = 1; i<partie.getNbJoueurs()+1; i++) {
+
             champsJoueurs.add(new JTextField());
             labelJoueurs.add(new JLabel());
         }
