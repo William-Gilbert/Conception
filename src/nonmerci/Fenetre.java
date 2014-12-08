@@ -55,9 +55,12 @@ public class Fenetre extends JFrame{
         fondPanel fondMenuPrincipal= new fondPanel(new ImageIcon("image/menu/fond.jpg").getImage());
         global.setLayout(new BorderLayout());   //Efface le Layout
         fondMenuPrincipal.setLayout(null);//aligner verticalement
-        boutonLancer.setBounds(165,280,107,31);//centrer les boutons
-        boutonAPropos.setBounds(169,320,97,27);
-        boutonQuitter.setBounds(169,390,97,31);
+        boutonLancer.setBounds(165, 280, 96, 29);//centrer les boutons
+        boutonLancer.setBorderPainted(false);
+        boutonAPropos.setBounds(165,320,96,28);
+        boutonAPropos.setBorderPainted(false);
+        boutonQuitter.setBounds(165,390,95,29);
+        boutonQuitter.setBorderPainted(false);
         fondMenuPrincipal.add(boutonLancer);
         fondMenuPrincipal.add(boutonAPropos);
         fondMenuPrincipal.add(boutonQuitter);
@@ -75,9 +78,9 @@ public class Fenetre extends JFrame{
         controlButton = new ControlButton(this,partie);
 
         confirmerJoueurs = new JButton("Confirmer");
-        boutonLancer = new JButton(new ImageIcon("image/menu/jouer.png"));
-        boutonQuitter = new JButton(new ImageIcon("image/menu/quitter.png"));
-        boutonAPropos = new JButton(new ImageIcon("image/menu/apropos.png"));
+        boutonLancer = new JButton(new ImageIcon("image/menu/jouer.jpg"));
+        boutonQuitter = new JButton(new ImageIcon("image/menu/quitter.jpg"));
+        boutonAPropos = new JButton(new ImageIcon("image/menu/apropos.jpg"));
         boutonLancer.addActionListener(controlButton);
         boutonAPropos.addActionListener(controlButton);
         boutonQuitter.addActionListener(controlButton);
@@ -166,6 +169,12 @@ public class Fenetre extends JFrame{
         if(m.sizePioche()>0 || uneCarteCourante) {
             carteCourante.setBounds(625 - 51 - 5, 310, 51, 84);
             imgManche.add(carteCourante);
+            if(maCarteCourante.getJeton()>0){
+                jeton.setBounds(480, 320, 78, 75);
+                imgManche.add(jeton);
+                nbJet.setBounds(512, 334, 200, 50);
+                imgManche.add(nbJet);
+            }
         }
         //pioche
         if(m.sizePioche()>0) {
@@ -190,12 +199,7 @@ public class Fenetre extends JFrame{
         labelJoueurs.get(2).setBounds(625+15,695,100,31-5);
         imgManche.add(labelJoueurs.get(2));
         //jeton
-        if(maCarteCourante.getJeton()>0){
-            jeton.setBounds(480, 320, 78, 75);
-            imgManche.add(jeton);
-            nbJet.setBounds(512, 334, 200, 50);
-            imgManche.add(nbJet);
-        }
+
 
         //Squelette de placement pour le jeu selon le nombre de joueurs
         switch(partie.getNbJoueurs()){
