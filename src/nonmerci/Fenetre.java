@@ -60,11 +60,12 @@ public class Fenetre extends JFrame{
         fondMenuPrincipal.setLayout(null);//aligner verticalement
         boutonLancer.setBounds(165, 280, 96, 29);//centrer les boutons
         boutonLancer.setBorderPainted(false);
-        boutonAPropos.setBounds(165,320,96,28);
+        boutonAPropos.setBounds(165, 320, 96, 28);
         boutonAPropos.setBorderPainted(false);
-        boutonhowtoplay.setBounds(165,350,96,28);
+        boutonhowtoplay.setBounds(150, 359, 125, 28);
+        boutonhowtoplay.setBorderPainted(false);
 
-        boutonQuitter.setBounds(165,390,95,29);
+        boutonQuitter.setBounds(165,401,95,29);
         boutonQuitter.setBorderPainted(false);
         fondMenuPrincipal.add(boutonLancer);
         fondMenuPrincipal.add(boutonAPropos);
@@ -87,7 +88,7 @@ public class Fenetre extends JFrame{
         boutonLancer = new JButton(new ImageIcon("image/menu/jouer.jpg"));
         boutonQuitter = new JButton(new ImageIcon("image/menu/quitter.jpg"));
         boutonAPropos = new JButton(new ImageIcon("image/menu/apropos.jpg"));
-        boutonhowtoplay = new JButton("Aide");
+        boutonhowtoplay = new JButton(new ImageIcon("image/menu/commentJouer.jpg"));
         boutonLancer.addActionListener(controlButton);
         boutonAPropos.addActionListener(controlButton);
         boutonhowtoplay.addActionListener(controlButton);
@@ -193,13 +194,15 @@ public class Fenetre extends JFrame{
             imgManche.add(piocheLabel);
         }
         //bouton accepte
-        accepteCarte =new JButton("Prendre carte");
+        accepteCarte =new JButton(new ImageIcon("image/menu/prendreCarte.png"));
         accepteCarte.setBounds(470,400,150,30);
+        accepteCarte.setBorderPainted(false);
         accepteCarte.addActionListener(controlButton);
         imgManche.add(accepteCarte);
         //bouton refuse
-        refuseCarte =new JButton("Passer");
+        refuseCarte =new JButton(new ImageIcon("image/menu/passer.png"));
         refuseCarte.setBounds(670,400,150,30);
+        refuseCarte.setBorderPainted(false);
         refuseCarte.addActionListener(controlButton);
         if(partie.getJoueurs(0).getJeton()<=0) {refuseCarte.setEnabled(false);}
         imgManche.add(refuseCarte);
