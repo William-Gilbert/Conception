@@ -238,17 +238,17 @@ public class Fenetre extends JFrame{
                     x = 210;
                     y = 400;
                 } else if (z == 1) {
-                    x = 210;
-                    y = -50;
+                    x = 50;
+                    y = 250;
                 } else if (z == 2) {
                     x = 800;
                     y = 400;
                 } else if (z == 3) {
-                    x = 530;
-                    y = -50;
+                    x = 470;
+                    y = 250;
                 }else if( z==4){
                     x = 847 ;
-                    y = -50;
+                    y = 250;
                 }
             }else {
                 if (z == 0) {
@@ -256,36 +256,56 @@ public class Fenetre extends JFrame{
                     y = 400;
                 } else if (z == 1) {
                     x = 210;
-                    y = -50;
+                    y = 250;
                 } else if (z == 2) {
                     x = 800;
                     y = 400;
                 } else if (z == 3) {
                     x = 800;
-                    y = -50;
+                    y = 250;
                 }
             }
 
-            if (jActuelle.nbCartes() < 7) y += 100;
-            if (jActuelle.nbCartes() < 13) y += 100;
+            if(z==0||z==2) {
+                if (jActuelle.nbCartes() < 7) y += 100;
+                if (jActuelle.nbCartes() < 13) y += 100;
+            }else{
+                if (jActuelle.nbCartes() < 7) y -= 100;
+                if (jActuelle.nbCartes() < 13) y -= 100;
+            }
             for (int i = 0; i < jActuelle.nbCartes(); i++) {
                 Carte afficheCarte = jActuelle.getCartes(i);
                 carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
                 carteJoueur.setBounds(x, y, 51, 84);
                 x += 55;
                 imgManche.add(carteJoueur);
-                if (i % 6 == 5 && i!=0) {
-                    y += 100;
+                if (i %6==5) {
+
                     if (z == 0) {
+                        y += 100;
                         x = 210;
-                    } else if (z == 1) {
+                    } else if (z == 1&&partie.getNbJoueurs()==5) {
+                        y -= 100;
+                        x = 50;
+                    }else if (z == 1&&(partie.getNbJoueurs()==4||partie.getNbJoueurs()==3)) {
+                        y -= 100;
                         x = 210;
                     }
                     else if (z == 2) {
+                        y += 100;
                         x = 800;
                     }
-                    else if(z==3){
+                    else if(z==3&&partie.getNbJoueurs()==5){
+                        y -= 100;
+                        x = 470;
+                    }
+                    else if(z==3&&partie.getNbJoueurs()==4){
+                        y -= 100;
                         x = 800;
+                    }
+                    else if (z == 4) {
+                        y -= 100;
+                        x = 847;
                     }
                 }
             }
