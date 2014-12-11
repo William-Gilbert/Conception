@@ -3,6 +3,8 @@ package nonmerci;
 import javax.swing.*; //Pour les composants graphiques
 import javax.swing.border.Border;
 import java.awt.*; //Pour la Jframe
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -40,8 +42,8 @@ public class Fenetre extends JFrame{
 
     public Carte maCarteCourante;
     public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
-
-
+    public int jetonsMemoire;
+    Timer timer;
 
     public Fenetre(){
         init();
@@ -291,7 +293,9 @@ public class Fenetre extends JFrame{
                 if (jActuelle.nbCartes() < 7) y -= 100;
                 if (jActuelle.nbCartes() < 13) y -= 100;
             }
+            int nbCarteligne=0;
             for (int i = 0; i < jActuelle.nbCartes(); i++) {
+                boolean suiteEnCours=false;
                 Carte afficheCarte = jActuelle.getCartes(i);
                 carteJoueur = new JLabel(new ImageIcon("image/carte/" + afficheCarte.getValue() + ".png"));
                 carteJoueur.setBounds(x, y, 51, 84);
@@ -299,99 +303,127 @@ public class Fenetre extends JFrame{
                 if (i < jActuelle.nbCartes()-1) {
                     if ((jActuelle.getCartes(i).getValue() + 1) == jActuelle.getCartes(i + 1).getValue()) {
                         x += 20;
+                        suiteEnCours=true;
                     }
                     else x += 55;
                 }else x += 55;
 
                 imgManche.add(carteJoueur);
-                if (i %6==5) {
-
+                if (nbCarteligne>=5&&!suiteEnCours) {
+                    nbCarteligne = 0;
                     if (z == 0) {
                         y += 100;
                         x = 210;
-                    } else if (z == 1&&partie.getNbJoueurs()==5) {
+                    } else if (z == 1 && partie.getNbJoueurs() == 5) {
                         y -= 100;
                         x = 50;
-                    }else if (z == 1&&(partie.getNbJoueurs()==4||partie.getNbJoueurs()==3)) {
+                    } else if (z == 1 && (partie.getNbJoueurs() == 4 || partie.getNbJoueurs() == 3)) {
                         y -= 100;
                         x = 210;
-                    }
-                    else if (z == 2) {
+                    } else if (z == 2) {
                         y += 100;
                         x = 800;
-                    }
-                    else if(z==3&&partie.getNbJoueurs()==5){
+                    } else if (z == 3 && partie.getNbJoueurs() == 5) {
                         y -= 100;
                         x = 470;
-                    }
-                    else if(z==3&&partie.getNbJoueurs()==4){
+                    } else if (z == 3 && partie.getNbJoueurs() == 4) {
                         y -= 100;
                         x = 800;
-                    }
-                    else if (z == 4) {
+                    } else if (z == 4) {
                         y -= 100;
                         x = 847;
                     }
+                }else{
+                    nbCarteligne++;
                 }
             }
-
-
 
         }
         actualiser();
 
         if(!uneCarteCourante){
-            System.out.println("Partie terminé");
+            String messageFin;
+            partie.endGame();
+
+            messageFin="Le gagnant est... "+partie.getJoueurs(0).getNom()+" avec "+partie.getJoueurs(0).nbPoints()+" points!";
+            for(int i=1; i<partie.getNbJoueurs();i++){
+                messageFin+="\n"+(i+1)+"-"+partie.getJoueurs(i).getNom()+" : "+partie.getJoueurs(i).nbPoints()+"points.";
+            }
+            messageFin+="\n\nRejouer?";
+
+            String[] choix = {"Avec les mêmes paramètres", "Changer les paramètres", "Quitter"};
+            int fin = JOptionPane.showOptionDialog(
+                    null,
+                    messageFin,
+                    "Partie terminée!",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    choix,
+                    choix[0]
+            );
+
+            if(fin==0){
+                partie.reset(jetonsMemoire);
+                nouvelleManche();
+            }
+            if(fin==1){
+                boutonLancer.doClick();
+            }
+            if(fin==2){
+                quitterItem.doClick();
+            }
         }
-
-
-
 
     }
 
     public void IA() {
 
-        int accOrDeny;
-        String tps="";
 
-        Random r = new Random();
+
         ArrayList<Integer> ordreJeu = new ArrayList<Integer>();
-
-        if(partie.getNbJoueurs()==3) {
+        if (partie.getNbJoueurs() == 3) {
             ordreJeu.add(2);
             ordreJeu.add(1);
-        }
-        else if(partie.getNbJoueurs()==4) {
+        } else if (partie.getNbJoueurs() == 4) {
             ordreJeu.add(2);
             ordreJeu.add(3);
             ordreJeu.add(1);
-        }
-        else if(partie.getNbJoueurs()==5) {
+        } else if (partie.getNbJoueurs() == 5) {
             ordreJeu.add(2);
             ordreJeu.add(4);
             ordreJeu.add(3);
             ordreJeu.add(1);
         }
-        //Joueur 2 joue
-        boolean choix=false;
-
+        int accOrDeny;
+        boolean choix = false;
+        Random r = new Random();
         for (int i = 1; i < partie.getNbJoueurs(); i++) {
-
             if (m.sizePioche() > 0 || uneCarteCourante) {
                 accOrDeny = r.nextInt(2);
-                if(accOrDeny==1) {
-                    choix = partie.getJoueurs(ordreJeu.get(i-1)).refuse(maCarteCourante);
-                }else{
-                    partie.getJoueurs(ordreJeu.get(i-1)).accepteCarte(maCarteCourante);
+                if (accOrDeny == 1) {
+                    choix = partie.getJoueurs(ordreJeu.get(i - 1)).refuse(maCarteCourante);
+                } else {
+                    partie.getJoueurs(ordreJeu.get(i - 1)).accepteCarte(maCarteCourante);
                 }
-                if (choix == false ||accOrDeny!=1) {//on ne change pas la pioche si on passe
+                if (choix == false || accOrDeny != 1) {//on ne change pas la pioche si on passe
                     if (m.sizePioche() > 0) {
                         maCarteCourante = m.piocher();
                     } else {
                         uneCarteCourante = false;
                     }
                 }
-                affichageCartesJoueurs();
+            /*    ActionListener actionTimer = new ActionListener() {
+                    // Methode appelee a chaque tic du timer
+                    public void actionPerformed(ActionEvent event) {*/
+                        affichageCartesJoueurs();
+                       /* timer.stop();
+                    }
+
+                };*/
+
+                //timer = new Timer(1000, actionTimer);
+              //  timer.start();
             }
         }
     }

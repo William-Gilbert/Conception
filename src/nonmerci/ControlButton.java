@@ -72,6 +72,7 @@ public class ControlButton implements ActionListener {
             }
 
             if(passeralasuite) {
+                fen.jetonsMemoire=Integer.parseInt(jetonsInit);
                 partie.videJoueur();
                 for(JTextField champs:fen.champsJoueurs){
                     j = new Joueur(champs.getText(), Integer.parseInt(jetonsInit));

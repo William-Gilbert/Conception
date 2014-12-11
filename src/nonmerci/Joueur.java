@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by bicou on 12/11/14.
  */
-public class Joueur {
+public class Joueur implements Comparable{
 
     private int jetons;
     public Suite main;
@@ -44,9 +44,9 @@ public class Joueur {
         return main.nbCartes();
     }
 
-    public void reset(){  //utilisé pour le test de nbpoints
+    public void reset(int jetonsMemoire){  //utilisé pour le test de nbpoints
         main.clear();
-        jetons = 0;
+        jetons = jetonsMemoire;
     }
 
     public int nbPoints() {
@@ -63,5 +63,12 @@ public class Joueur {
 
     public Carte getCartes(int index) {
         return main.get(index);
+    }
+
+    public int compareTo(Object o) {
+        Joueur j = (Joueur)o;
+        if(nbPoints()>j.nbPoints())return -1;
+        if(nbPoints()==j.nbPoints())return 0;
+        return 1;
     }
 }

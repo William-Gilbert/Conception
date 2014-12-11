@@ -3,6 +3,8 @@ package nonmerci;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.util.Collections.sort;
+
 /**
  * Created by William on 20/11/2014.
  */
@@ -36,5 +38,16 @@ public class Partie {
 
     public void addJoueur(Joueur j) {
         joueurs.add(j);
+    }
+
+    public ArrayList<Joueur> endGame(){
+        sort(joueurs);
+        return joueurs;
+    }
+
+    public void reset(int jetonsMemoire){
+        for(Joueur j:joueurs){
+            j.reset(jetonsMemoire);
+        }
     }
 }
