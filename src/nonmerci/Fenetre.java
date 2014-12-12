@@ -1,13 +1,9 @@
 package nonmerci;
 
 import javax.swing.*; //Pour les composants graphiques
-import javax.swing.border.Border;
 import java.awt.*; //Pour la Jframe
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
+
 
 public class Fenetre extends JFrame{
     //Attributs du menu
@@ -38,12 +34,10 @@ public class Fenetre extends JFrame{
     public JPanel global;
     public JFrame initialisation;
     //Timer
-    JLabel labelTime;
 
     public Carte maCarteCourante;
     public boolean uneCarteCourante; //boolean utlise pour prendre la derniere carte alors que le paquet est vide
     public int jetonsMemoire;
-    Timer timer;
 
     public Fenetre(){
         init();
@@ -395,18 +389,33 @@ public class Fenetre extends JFrame{
             ordreJeu.add(3);
             ordreJeu.add(1);
         }
-        int accOrDeny;
-        boolean choix = false;
-        Random r = new Random();
+
+        boolean choix=false;
+
         for (int i = 1; i < partie.getNbJoueurs(); i++) {
             if (m.sizePioche() > 0 || uneCarteCourante) {
-                accOrDeny = r.nextInt(2);
-                if (accOrDeny == 1) {
+                ArrayList<Carte> lc = partie.getJoueurs(i).getCarte().getJeuJoueur();
+                for(Carte c : lc){
+                    if(c.getValue()-1 == maCarteCourante.getValue() || c.getValue()+1==maCarteCourante.getValue() ){
+                        choix = true;//SI il y a une carte directement supérieur ou directement inférieur dans le jeu du joueur
+                        break;
+                    }else{
+                        choix = false;
+                    }
+                }
+                if(!choix && maCarteCourante.getValue()<9) choix=true;//Si une carte est les IA l'accepte
+                if(lc.size()==0 && maCarteCourante.getValue()<20) choix = true;//Si il n'y a aucune carte dansle jeu, les IA accepte que les cartes <20
+                if(!choix && maCarteCourante.getJeton()>=10) choix = true;//si grand nombre de jeton
+
+
+
+                if (!choix) {
                     choix = partie.getJoueurs(ordreJeu.get(i - 1)).refuse(maCarteCourante);
                 } else {
                     partie.getJoueurs(ordreJeu.get(i - 1)).accepteCarte(maCarteCourante);
+                    if (m.sizePioche() > 0) maCarteCourante = m.piocher();
                 }
-                if (choix == false || accOrDeny != 1) {//on ne change pas la pioche si on passe
+                if (!choix ) {//on ne change pas la pioche si on passe
                     if (m.sizePioche() > 0) {
                         maCarteCourante = m.piocher();
                     } else {

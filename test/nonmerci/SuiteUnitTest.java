@@ -3,9 +3,9 @@ package nonmerci;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by bicou on 03/12/14.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class SuiteUnitTest {
     @Test
     public void ajouterCarteTest(){
@@ -97,5 +97,21 @@ public class SuiteUnitTest {
 
         suite.clear();
         Assert.assertEquals(0,suite.nbCartes());
+    }
+
+    @Test
+    public void testGetJeuJoueur(){
+        Joueur j = new Joueur("toto",11);
+        Carte c1 = new Carte(5);
+        Carte c2 = new Carte(8);
+        j.accepteCarte(c1);
+        j.accepteCarte(c2);
+        List<Carte> lc = new ArrayList<Carte>();
+        lc.add(c1);
+        lc.add(c2);
+
+        List<Carte> nouvLc;
+        nouvLc = j.main.getJeuJoueur();
+        Assert.assertEquals(nouvLc,lc);
     }
 }

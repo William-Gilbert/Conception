@@ -1,12 +1,7 @@
 package nonmerci;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-/**
- * Created by bicou on 12/11/14.
- */
+
 public class Joueur implements Comparable{
 
     private int jetons;
@@ -53,10 +48,6 @@ public class Joueur implements Comparable{
         return main.nbPoints();
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -70,5 +61,9 @@ public class Joueur implements Comparable{
         if(nbPoints()>j.nbPoints())return -1;
         if(nbPoints()==j.nbPoints())return 0;
         return 1;
+    }
+
+    public Suite getCarte() {
+        return main;
     }
 }

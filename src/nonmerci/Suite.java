@@ -1,14 +1,10 @@
 package nonmerci;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.sort;
 
-/**
- * Created by bicou on 03/12/14.
- */
 public class Suite {
     //Les suites sont une liste de liste de carte
     public List<ArrayList<Carte>> suite;
@@ -72,7 +68,6 @@ public class Suite {
     }
 
     public Carte get(int index) {
-        int mem = 0;
         ArrayList<Carte> listeDesCartes = new ArrayList<Carte>();
         for (ArrayList<Carte> aSuite : suite) {
             for (Carte carte : aSuite) {
@@ -81,6 +76,16 @@ public class Suite {
         }
         return listeDesCartes.get(index);
 
+    }
+
+    public ArrayList<Carte> getJeuJoueur(){
+        ArrayList<Carte> lc = new ArrayList<Carte>();
+        for(ArrayList<Carte> alc : suite){
+            for(Carte c : alc){
+                lc.add(c);
+            }
+        }
+        return lc;
     }
 
 
