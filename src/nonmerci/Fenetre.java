@@ -409,11 +409,12 @@ public class Fenetre extends JFrame{
 
 
 
-                if (!choix) {
+                if (!choix) {//si l'ia refuse
                     choix = partie.getJoueurs(ordreJeu.get(i - 1)).refuse(maCarteCourante);
-                } else {
+                } else {//si'lia accepte
                     partie.getJoueurs(ordreJeu.get(i - 1)).accepteCarte(maCarteCourante);
                     if (m.sizePioche() > 0) maCarteCourante = m.piocher();
+                    else uneCarteCourante = false;
                 }
                 if (!choix ) {//on ne change pas la pioche si on passe
                     if (m.sizePioche() > 0) {
@@ -425,7 +426,7 @@ public class Fenetre extends JFrame{
             /*    ActionListener actionTimer = new ActionListener() {
                     // Methode appelee a chaque tic du timer
                     public void actionPerformed(ActionEvent event) {*/
-                        affichageCartesJoueurs();
+                affichageCartesJoueurs();
                        /* timer.stop();
                     }
 
