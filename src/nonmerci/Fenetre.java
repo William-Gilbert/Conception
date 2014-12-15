@@ -337,11 +337,12 @@ public class Fenetre extends JFrame{
 
         if(!uneCarteCourante){
             String messageFin;
-            partie.endGame();
+            ArrayList<Joueur> endGame = new ArrayList<Joueur>();
+            endGame = partie.endGame();
 
-            messageFin="Le gagnant est... "+partie.getJoueurs(0).getNom()+" avec "+partie.getJoueurs(0).nbPoints()+" points!";
+            messageFin="Le gagnant est... "+endGame.get(0).getNom()+" avec "+endGame.get(0).nbPoints()+" points!";
             for(int i=1; i<partie.getNbJoueurs();i++){
-                messageFin+="\n"+(i+1)+"-"+partie.getJoueurs(i).getNom()+" : "+partie.getJoueurs(i).nbPoints()+"points.";
+                messageFin+="\n"+(i+1)+"-"+endGame.get(i).getNom()+" : "+endGame.get(i).nbPoints()+"points.";
             }
             messageFin+="\n\nRejouer?";
 

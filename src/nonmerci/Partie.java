@@ -41,8 +41,10 @@ public class Partie {
     }
 
     public ArrayList<Joueur> endGame(){
-        sort(joueurs);
-        return joueurs;
+        ArrayList<Joueur> ordreFin = new ArrayList<Joueur>();
+        ordreFin.addAll(joueurs);
+        sort(ordreFin);
+        return ordreFin;
     }
 
     public void reset(int jetonsMemoire){
