@@ -337,8 +337,7 @@ public class Fenetre extends JFrame{
 
         if(!uneCarteCourante){
             String messageFin;
-            ArrayList<Joueur> endGame = new ArrayList<Joueur>();
-            endGame = partie.endGame();
+            ArrayList<Joueur> endGame = partie.endGame();
 
             messageFin="Le gagnant est... "+endGame.get(0).getNom()+" avec "+endGame.get(0).nbPoints()+" points!";
             for(int i=1; i<partie.getNbJoueurs();i++){

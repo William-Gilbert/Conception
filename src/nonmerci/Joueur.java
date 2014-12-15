@@ -45,7 +45,7 @@ public class Joueur implements Comparable{
     }
 
     public int nbPoints() {
-        return main.nbPoints();
+        return main.nbPoints()+jetons;
     }
 
     public String getNom() {
